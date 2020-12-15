@@ -9,9 +9,6 @@
 class Plane
 {
 private:
-	int xcoordinate;
-	int ycoordinate;
-	std::string nametag;
 
 public:
 	Plane(std::string name, int x, int y)
@@ -20,11 +17,12 @@ public:
 		xcoordinate = x;
 		ycoordinate = y;
 	}
-	void UpdateCoordinates(int x, int y)
-	{
-		xcoordinate = x;
-		ycoordinate = y;
-	}
+
+	
+	std::string nametag;
+	int xcoordinate;
+	int ycoordinate;
+
 	void TakeOff();
 	void Land();
 };
