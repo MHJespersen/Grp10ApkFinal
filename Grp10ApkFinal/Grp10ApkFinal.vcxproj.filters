@@ -32,5 +32,11 @@
     <ClInclude Include="PlaneGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CalculatorSpeed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CalculatorDistance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
