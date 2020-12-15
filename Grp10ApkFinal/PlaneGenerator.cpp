@@ -4,3 +4,4 @@ Plane PlaneGenerator::GeneratePlane()
 {
     return Plane();
 }
+

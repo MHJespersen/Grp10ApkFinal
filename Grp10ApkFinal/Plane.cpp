@@ -7,3 +7,4 @@ void Plane::TakeOff()
 void Plane::Land()
 {
 }
+

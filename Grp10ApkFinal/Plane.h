@@ -12,7 +12,7 @@ private:
 	int xcoordinate;
 	int ycoordinate;
 	std::string nametag;
-		
+
 public:
 	void TakeOff();
 	void Land();
