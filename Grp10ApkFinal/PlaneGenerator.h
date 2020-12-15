@@ -10,6 +10,5 @@ class PlaneGenerator
 {
 private:
 	Plane GeneratePlane();
-
 public:
 };
