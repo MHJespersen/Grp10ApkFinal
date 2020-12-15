@@ -24,6 +24,8 @@
     <ClCompile Include="PlaneGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CalculatorDistance.h" />
+    <ClInclude Include="CalculatorSpeed.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PlaneGenerator.h" />
   </ItemGroup>
