@@ -16,3 +16,8 @@ void Plane::Land()
 {
 }
 
+void Plane::operator()()
+{
+	std::cout << "Calling from : " << nametag << std::endl;
+}
+

@@ -21,4 +21,5 @@ public:
 
 	void TakeOff();
 	void Land();
+	void operator()();
 };
