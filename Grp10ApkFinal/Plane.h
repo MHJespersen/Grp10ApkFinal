@@ -11,13 +11,7 @@ class Plane
 private:
 
 public:
-	Plane(std::string name, int x, int y)
-	{
-		nametag = name;
-		xcoordinate = x;
-		ycoordinate = y;
-	}
-
+	Plane(std::string name, int x, int y);
 	
 	std::string nametag;
 	int xcoordinate;

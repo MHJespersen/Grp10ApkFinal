@@ -6,9 +6,12 @@
 
 #include "Plane.h"
 
+
 class PlaneGenerator
 {
 private:
-	Plane GeneratePlane();
+	void UpdatePlaneCoordinates(Plane plane);
 public:
+	PlaneGenerator();
+	Plane GeneratePlane();
 };
