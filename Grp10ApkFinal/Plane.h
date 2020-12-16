@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
 
 class Plane
 {
@@ -16,6 +17,7 @@ public:
 	std::string nametag;
 	int xcoordinate;
 	int ycoordinate;
+	time_t now = time(0);
 
 	void TakeOff();
 	void Land();

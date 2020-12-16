@@ -2,19 +2,20 @@
 #ifndef CALCULATORSPEED_H
 #define CALCULATORSPEED_H
 #endif
+#include "Plane.h"
+#include "CalculatorDistance.h"
 
-class CalculatorSpeed
-{
-private:
-	int distance;
-	int speed;
-
-
-public:
-	int CalculateSpeed(Plane prevPlane, Plane newPlane)
+namespace Calculator{
+	class CalculatorSpeed
 	{
-		//to calculate speed we need to different timestamps
+	private:
+		int distance;
+		int speed;
+		int timeStamps;
+		CalculatorDistance distCalc;
 
-	}
+	public:
+		int CalculateSpeed(Plane prevPlane, Plane newPlane);
 
-};
+	};
+}
