@@ -99,3 +99,8 @@ void Plane::PrintLocation()
 	std::cout << "Location: " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
 }
 
+void Plane::operator()()
+{
+	std::cout << "Calling from : " << nametag << std::endl;
+}
+

@@ -26,4 +26,5 @@ public:
 
 	void TakeOff(int Direction);
 	void Land();
+	void operator()();
 };
