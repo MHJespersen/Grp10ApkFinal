@@ -5,23 +5,26 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
 
 class Plane
 {
 private:
 
 public:
-	Plane(std::string name, int x, int y)
+	Plane(std::string name, int x, int y, time_t timestamp)
 	{
 		nametag = name;
 		xcoordinate = x;
 		ycoordinate = y;
+		now = timestamp;
 	}
 
 	
 	std::string nametag;
 	int xcoordinate;
 	int ycoordinate;
+	time_t now = time(0);
 
 	void TakeOff();
 	void Land();

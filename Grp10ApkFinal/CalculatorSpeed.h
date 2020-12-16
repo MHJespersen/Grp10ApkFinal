@@ -3,18 +3,32 @@
 #define CALCULATORSPEED_H
 #endif
 
-class CalculatorSpeed
-{
-private:
-	int distance;
-	int speed;
+#include "CalculatorDistance.h"
+#include "Plane.h"
 
-
-public:
-	int CalculateSpeed(Plane prevPlane, Plane newPlane)
+namespace Calculations{
+	class CalculatorSpeed
 	{
-		//to calculate speed we need to different timestamps
+	private:
+		int distance;
+		int speed;
+		int timeStamps;
+		CalculatorDistance distCalc;
 
-	}
+	public:
+		int CalculateSpeed(Plane prevPlane, Plane newPlane)
+		{
+			//first we need two different timestamps from the plane
+			timeStamps = (prevPlane.now - newPlane.now);
+			distance = distCalc.CalculateDistance(prevPlane, newPlane);
+			speed = distance / timeStamps;
 
-};
+			if (speed < 0)
+			{
+				speed *= -1;
+			}
+			return round(speed);
+		}
+
+	};
+}

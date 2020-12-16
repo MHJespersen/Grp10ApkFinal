@@ -3,13 +3,15 @@
 #ifndef CALCULATORDISTANCE_H
 #define CALCULATORDISTANCE_H
 #endif 
-#include <boost/signals2.hpp>
+#include "Plane.h"
 
-class CalculatorDistance
-{
-public:
-	int CalculateDistance(Plane prevPlane, Plane newPlane)
+namespace Calculations {
+	class CalculatorDistance
 	{
-		return round(sqrt(pow(prevPlane.x - newPlane.x, 2) + pow(prevPlane.y - newPlane.y, 2));
-	}
-};
+	public:
+		int CalculateDistance(Plane prevPlane, Plane newPlane)
+		{
+			return round(sqrt(pow(prevPlane.xcoordinate - newPlane.xcoordinate, 2) + pow(prevPlane.ycoordinate - newPlane.ycoordinate, 2)));
+		}
+	};
+}
