@@ -39,6 +39,12 @@ void test(mutex& m1, mutex& m2)
     }
 }
 
+void testPlanegenerator()
+{
+    PlaneGenerator planeGenerator;
+    Plane myPlane = planeGenerator.GeneratePlane();
+}
+
 int main(int argc, const char* argv[])
 {
     mutex m1, m2;
@@ -56,13 +62,8 @@ int main(int argc, const char* argv[])
     //join threads to stay alive
     t2.join();
     t1.join();
+
+    //testing Planegenerator
+    testPlanegenerator();
     return 0;
-}
-
-int main(int argc, const char* argv[])
-{
-    cout << "Plane Generator!\n" << endl;
-
-    PlaneGenerator planeGenerator;
-    Plane myPlane = planeGenerator.GeneratePlane();
 }

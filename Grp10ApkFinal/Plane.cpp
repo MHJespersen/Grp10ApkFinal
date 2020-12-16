@@ -1,7 +1,6 @@
 #include "Plane.h"
-#include <boost/chrono.hpp>
-#include <boost/thread/thread.hpp>
-
+#include <thread> 
+#include <boost/date_time.hpp>
 
 const int NORTH = 0;
 const int SOUTH = 1;
@@ -50,7 +49,8 @@ void Plane::FlyNorth()
 	// Fly north until out of airspace, then land.
 	while(ycoordinate <= 9)
 	{
-		boost::this_thread::sleep(boost::posix_time::seconds(rand() % 5 + 1));
+		std::this_thread::sleep_for(std::chrono::seconds(rand() % 5 + 1));
+
 		ycoordinate++;
 		PrintLocation();
 	}
@@ -62,7 +62,7 @@ void Plane::FlySouth()
 	// Fly south until out of airspace, then land.
 	while(ycoordinate >= 0)
 	{
-		boost::this_thread::sleep(boost::posix_time::seconds(rand() % 5 + 1));
+		std::this_thread::sleep_for(std::chrono::seconds(rand() % 5 + 1));
 		ycoordinate++;
 		PrintLocation();
 	}
@@ -74,7 +74,7 @@ void Plane::FlyEast()
 	// Fly east until out of airspace, then land.
 	while(xcoordinate <= 9)
 	{
-		boost::this_thread::sleep(boost::posix_time::seconds(rand() % 5 + 1));
+		std::this_thread::sleep_for(std::chrono::seconds(rand() % 5 + 1));
 		xcoordinate++;
 		PrintLocation();
 	}
@@ -86,7 +86,7 @@ void Plane::FlyWest()
 	// Fly west until out of airspace, then land.
 	while(xcoordinate >= 0)
 	{
-		boost::this_thread::sleep(boost::posix_time::seconds(rand() % 5 + 1));
+		std::this_thread::sleep_for(std::chrono::seconds(rand() % 5 + 1));
 		xcoordinate++;
 		PrintLocation();
 	}
