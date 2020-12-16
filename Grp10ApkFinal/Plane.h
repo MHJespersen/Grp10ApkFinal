@@ -5,11 +5,16 @@
 
 #include <iostream>
 #include <string>
-#include <ctime>
+#include <boost/date_time.hpp>
 
 class Plane
 {
 private:
+	void FlyNorth();	
+	void FlySouth();	
+	void FlyEast();	
+	void FlyWest();
+	void PrintLocation();
 
 public:
 	Plane(std::string name, int x, int y);
@@ -17,8 +22,8 @@ public:
 	std::string nametag;
 	int xcoordinate;
 	int ycoordinate;
-	time_t now = time(0);
+	int timestamp = 0;
 
-	void TakeOff();
+	void TakeOff(int Direction);
 	void Land();
 };

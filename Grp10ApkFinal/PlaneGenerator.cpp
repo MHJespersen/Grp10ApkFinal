@@ -4,6 +4,11 @@
 #include <boost/uuid/uuid_generators.hpp> // generators
 #include <boost/uuid/uuid_io.hpp>         // streaming operators etc.
 
+const int NORTH = 0;
+const int SOUTH = 1;
+const int EAST = 2;
+const int WEST = 3;
+
 PlaneGenerator::PlaneGenerator()
 {
     // Set random seed for random generator
@@ -41,34 +46,71 @@ Plane PlaneGenerator::GeneratePlane()
     }     
 
     // Generate unique name
-    std::string name = "";
+    const std::string name = boost::uuids::to_string(boost::uuids::random_generator()());
 
     Plane plane(name, x, y);
 
-    UpdatePlaneCoordinates(plane);
+    StartPlane(plane);
 
-    return plane;
+    return plane; // Maybe return ptr to plan / PUB / SUB?
 }
 
-// Reccursive?
-void PlaneGenerator::UpdatePlaneCoordinates(Plane plane)
+void PlaneGenerator::StartPlane(Plane plane)
 {
-    // sleep 1-5 secs
-    //Sleep(rand() % 5 + 1);
 
+    int ChooseRandomDirection = rand() % 1;
+
+    // First check if plane is in corners
+    if (plane.xcoordinate == 0 && plane.ycoordinate == 0)
+    {
+        // Fly North OR East
+        if (ChooseRandomDirection)
+            plane.TakeOff(NORTH);
+        else 
+            plane.TakeOff(EAST);
+    }
+    if (plane.xcoordinate == 0 && plane.ycoordinate == 9)
+    {
+        // Fly North OR West
+        if (ChooseRandomDirection)
+            plane.TakeOff(NORTH);
+        else 
+            plane.TakeOff(WEST);
+        
+    }
+    if (plane.xcoordinate == 9 && plane.ycoordinate == 0)
+    {
+        // Fly Sout OR East
+        if (ChooseRandomDirection)
+            plane.TakeOff(SOUTH);
+        else 
+            plane.TakeOff(EAST);
+    }
+    if (plane.xcoordinate == 9 && plane.ycoordinate == 9)
+    {
+        // Fly South OR West
+        if (ChooseRandomDirection)
+            plane.TakeOff(SOUTH);
+        else 
+            plane.TakeOff(WEST);
+    }
+
+    // If plane doesnt start in corner just fly to opposite site.
     if (plane.xcoordinate == 0)
     {
-        if (true)
-        {
-
-        }
+        plane.TakeOff(NORTH);
     }
-    else if(plane.ycoordinate == 0)
+    if (plane.xcoordinate == 9)
     {
-        if (true)
-        {
-
-        }
+        plane.TakeOff(SOUTH);
+    }
+    if (plane.ycoordinate == 0)
+    {
+        plane.TakeOff(EAST);
+    }
+    if (plane.ycoordinate == 9)
+    {
+        plane.TakeOff(WEST);
     }
 }
 

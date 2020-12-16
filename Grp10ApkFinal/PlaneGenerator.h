@@ -10,7 +10,7 @@
 class PlaneGenerator
 {
 private:
-	void UpdatePlaneCoordinates(Plane plane);
+	void StartPlane(Plane plane);
 public:
 	PlaneGenerator();
 	Plane GeneratePlane();
