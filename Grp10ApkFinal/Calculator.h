@@ -105,6 +105,8 @@ int courseCalculator(T1 newPlane, T2 prevPlane)
 	return degrees;
 }
 
+
+
 template<class T>
 void TagTester(T obj)
 {
