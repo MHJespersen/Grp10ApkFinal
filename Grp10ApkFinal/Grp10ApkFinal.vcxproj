@@ -23,7 +23,6 @@
     <ClCompile Include="Grp10ApkFinal.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PlaneGenerator.cpp" />
-    <ClCompile Include="WarningLogger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h" />
