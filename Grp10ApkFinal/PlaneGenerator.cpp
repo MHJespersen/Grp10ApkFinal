@@ -18,26 +18,26 @@ PlaneGenerator::PlaneGenerator()
 Plane PlaneGenerator::GeneratePlane()
 {
     // Determine which axis to on
-    int axis = rand() % 1; // Random number 0 or 1. 0 = x, 1 = y
+    bool axis = rand() % 1; // Random true or false. false = x, true = y
     // Determine which side to start
-    int startAtEnd = rand() % 1; // Random number 0 or 1. 0 = start, 1 = end
+    bool startAtEnd = rand() % 1; // Random true or false. false = start, true = end
 
     int x;
     int y;
 
-    // If y-axis
+    // If start on y-axis
     if(axis)
     {
         x = 0;
-        y = rand() % 10; // random number between 0 - 10;
+        y = rand() % 9; // random number between 0 - 9;
         if(startAtEnd)
         {
             x = 9;
         }
     }    
-    else // if x-axis
+    else // else start on x-axis
     {
-        x = rand() % 10; // random number between 0 - 10;
+        x = rand() % 9; // random number between 0 - 10;
         y = 0;
         if(startAtEnd)
         {
@@ -58,7 +58,7 @@ Plane PlaneGenerator::GeneratePlane()
 void PlaneGenerator::StartPlane(Plane plane)
 {
 
-    int ChooseRandomDirection = rand() % 1;
+    bool ChooseRandomDirection = rand() % 1;
 
     // First check if plane is in corners
     if (plane.xcoordinate == 0 && plane.ycoordinate == 0)
@@ -96,19 +96,19 @@ void PlaneGenerator::StartPlane(Plane plane)
     }
 
     // If plane doesnt start in corner just fly to opposite site.
-    if (plane.xcoordinate == 0)
+    if (plane.ycoordinate == 0)
     {
         plane.TakeOff(NORTH);
     }
-    if (plane.xcoordinate == 9)
+    if (plane.ycoordinate == 9)
     {
         plane.TakeOff(SOUTH);
     }
-    if (plane.ycoordinate == 0)
+    if (plane.xcoordinate == 0)
     {
         plane.TakeOff(EAST);
     }
-    if (plane.ycoordinate == 9)
+    if (plane.xcoordinate == 9)
     {
         plane.TakeOff(WEST);
     }

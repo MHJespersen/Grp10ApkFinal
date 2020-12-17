@@ -47,11 +47,11 @@ void testPlanegenerator()
 
 int main(int argc, const char* argv[])
 {
-    mutex m1, m2;
-    ControlTower* control = control->getInstance();
+    //mutex m1, m2;
+    //ControlTower* control = control->getInstance();
 
-    thread t1(test, ref(m1), ref(m2));
-    thread t2(&ControlTower::CheckAirspace, ControlTower::getInstance());
+    //thread t1(test, ref(m1), ref(m2));
+    //thread t2(&ControlTower::CheckAirspace, ControlTower::getInstance());
 
     //testing signal
     //boost::signals2::signal<void()> Sig;
@@ -60,8 +60,8 @@ int main(int argc, const char* argv[])
     //boost::signals2::connection c = tower.connections.connect(newPlane2);
 
     //join threads to stay alive
-    t2.join();
-    t1.join();
+    //t2.join();
+    //t1.join();
 
     //testing Planegenerator
     testPlanegenerator();

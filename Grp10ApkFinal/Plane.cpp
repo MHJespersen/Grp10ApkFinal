@@ -1,6 +1,7 @@
 #include "Plane.h"
-#include <thread> 
-#include <boost/date_time.hpp>
+#include <thread>
+#include <chrono>  
+#include <ctime>  
 
 const int NORTH = 0;
 const int SOUTH = 1;
@@ -13,15 +14,15 @@ Plane::Plane(std::string name, int x, int y)
 	xcoordinate = x;
 	ycoordinate = y;
 
-	timestamp = boost::posix_time::second_clock::local_time().time_of_day().seconds();
-
+	timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
 	// Set random seed for random generator
     srand(time(NULL));
 }
 
 void Plane::TakeOff(int Direction)
 {
-	std::cout << "Plane: " + nametag + " has taken off." << std::endl;
+	std::cout << "Plane : " + nametag + " has taken off." << std::endl;
+	std::cout << "From location : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
 
 	switch (Direction)
 	{
@@ -41,7 +42,8 @@ void Plane::TakeOff(int Direction)
 void Plane::Land()
 {
 	// Delete plane or give msg to subscriber that fly has landed etc
-	std::cout << "Plane: " + nametag + " has landed." << std::endl;
+	std::cout << "Plane : " + nametag + " has landed." << std::endl;
+	std::cout << "At location : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
 }
 
 void Plane::FlyNorth()
@@ -50,7 +52,7 @@ void Plane::FlyNorth()
 	while(ycoordinate <= 9)
 	{
 		std::this_thread::sleep_for(std::chrono::seconds(rand() % 5 + 1));
-
+		timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
 		ycoordinate++;
 		PrintLocation();
 	}
@@ -63,6 +65,7 @@ void Plane::FlySouth()
 	while(ycoordinate >= 0)
 	{
 		std::this_thread::sleep_for(std::chrono::seconds(rand() % 5 + 1));
+		timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
 		ycoordinate++;
 		PrintLocation();
 	}
@@ -75,6 +78,7 @@ void Plane::FlyEast()
 	while(xcoordinate <= 9)
 	{
 		std::this_thread::sleep_for(std::chrono::seconds(rand() % 5 + 1));
+		timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
 		xcoordinate++;
 		PrintLocation();
 	}
@@ -87,6 +91,7 @@ void Plane::FlyWest()
 	while(xcoordinate >= 0)
 	{
 		std::this_thread::sleep_for(std::chrono::seconds(rand() % 5 + 1));
+		timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
 		xcoordinate++;
 		PrintLocation();
 	}
@@ -95,8 +100,8 @@ void Plane::FlyWest()
 
 void Plane::PrintLocation()
 {
-	std::cout << "Plane: " + nametag << std::endl;
-	std::cout << "Location: " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
+	std::cout << "Plane : " + nametag << std::endl;
+	std::cout << "Location : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
 }
 
 void Plane::operator()()
