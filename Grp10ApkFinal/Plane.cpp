@@ -3,6 +3,7 @@
 #include <chrono>  
 #include <ctime>  
 
+
 const int NORTH = 0;
 const int SOUTH = 1;
 const int EAST = 2;
@@ -104,8 +105,7 @@ void Plane::PrintLocation()
 	std::cout << "Plane : " + nametag + " LOCATION : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
 }
 
-void Plane::operator()()
+Plane* Plane::operator()()
 {
-	std::cout << "Calling from : " << nametag << std::endl;
+	return this;
 }
-
