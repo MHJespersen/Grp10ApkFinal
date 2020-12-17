@@ -17,11 +17,12 @@ private:
 	void PrintLocation();
 
 public:
-	Plane(std::string name, int x, int y);
+	Plane(std::string name, float x, float y);
 	
 	std::string nametag;
-	int xcoordinate;
-	int ycoordinate;
+	float xcoordinate;
+	float ycoordinate;
+	float speed;
 	time_t timestamp;
 
 	void TakeOff(int Direction);

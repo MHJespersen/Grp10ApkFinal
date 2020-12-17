@@ -1,9 +1,9 @@
 #include "PlaneGenerator.h"
 #include <cstdlib>
-#include <boost/uuid/uuid.hpp>            // uuid class
-#include <boost/uuid/uuid_generators.hpp> // generators
-#include <boost/uuid/uuid_io.hpp>         // streaming operators etc.
-
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
+#include <thread>
 const int NORTH = 0;
 const int SOUTH = 1;
 const int EAST = 2;
@@ -29,19 +29,19 @@ Plane PlaneGenerator::GeneratePlane()
     if(axis)
     {
         x = 0;
-        y = rand() % 9; // random number between 0 - 9;
+        y = rand() % 100; // random number between 0 - 100;
         if(startAtEnd)
         {
-            x = 9;
+            x = 100;
         }
     }    
     else // else start on x-axis
     {
-        x = rand() % 9; // random number between 0 - 10;
+        x = rand() % 100; // random number between 0 - 100;
         y = 0;
         if(startAtEnd)
         {
-            y = 9;
+            y = 100;
         }
     }     
 
@@ -52,7 +52,7 @@ Plane PlaneGenerator::GeneratePlane()
 
     StartPlane(plane);
 
-    return plane; // Maybe return ptr to plan / PUB / SUB?
+    return plane; // Maybe return pointer to plane?
 }
 
 void PlaneGenerator::StartPlane(Plane plane)
@@ -69,7 +69,7 @@ void PlaneGenerator::StartPlane(Plane plane)
         else 
             plane.TakeOff(EAST);
     }
-    if (plane.xcoordinate == 0 && plane.ycoordinate == 9)
+    if (plane.xcoordinate == 0 && plane.ycoordinate == 100)
     {
         // Fly North OR West
         if (ChooseRandomDirection)
@@ -78,7 +78,7 @@ void PlaneGenerator::StartPlane(Plane plane)
             plane.TakeOff(WEST);
         
     }
-    if (plane.xcoordinate == 9 && plane.ycoordinate == 0)
+    if (plane.xcoordinate == 100 && plane.ycoordinate == 0)
     {
         // Fly Sout OR East
         if (ChooseRandomDirection)
@@ -86,7 +86,7 @@ void PlaneGenerator::StartPlane(Plane plane)
         else 
             plane.TakeOff(EAST);
     }
-    if (plane.xcoordinate == 9 && plane.ycoordinate == 9)
+    if (plane.xcoordinate == 100 && plane.ycoordinate == 100)
     {
         // Fly South OR West
         if (ChooseRandomDirection)
@@ -100,7 +100,7 @@ void PlaneGenerator::StartPlane(Plane plane)
     {
         plane.TakeOff(NORTH);
     }
-    if (plane.ycoordinate == 9)
+    if (plane.ycoordinate == 100)
     {
         plane.TakeOff(SOUTH);
     }
@@ -108,7 +108,7 @@ void PlaneGenerator::StartPlane(Plane plane)
     {
         plane.TakeOff(EAST);
     }
-    if (plane.xcoordinate == 9)
+    if (plane.xcoordinate == 100)
     {
         plane.TakeOff(WEST);
     }

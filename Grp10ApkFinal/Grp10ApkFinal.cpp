@@ -41,8 +41,8 @@ void test(mutex& m1, mutex& m2)
 
 void testPlanegenerator()
 {
-    PlaneGenerator planeGenerator;
-    Plane myPlane = planeGenerator.GeneratePlane();
+    thread t3(&PlaneGenerator::GeneratePlane, PlaneGenerator());
+    t3.join();
 }
 
 int main(int argc, const char* argv[])
