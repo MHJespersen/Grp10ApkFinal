@@ -11,7 +11,7 @@ class PlaneGenerator
 {
 private:
 	void StartPlane(Plane plane);
-public:
+public:	
 	PlaneGenerator();
-	Plane GeneratePlane();
+	void GeneratePlane();
 };

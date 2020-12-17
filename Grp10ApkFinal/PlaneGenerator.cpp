@@ -4,6 +4,7 @@
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
 #include <thread>
+#include "ControlTower.h"
 const int NORTH = 0;
 const int SOUTH = 1;
 const int EAST = 2;
@@ -15,8 +16,9 @@ PlaneGenerator::PlaneGenerator()
     srand(time(NULL));
 }
 
-Plane PlaneGenerator::GeneratePlane()
+void PlaneGenerator::GeneratePlane()
 {
+    ControlTower* control = ControlTower::getInstance();
     // Determine which axis to on
     bool axis = rand() % 1; // Random true or false. false = x, true = y
     // Determine which side to start
@@ -49,10 +51,8 @@ Plane PlaneGenerator::GeneratePlane()
     const std::string name = boost::uuids::to_string(boost::uuids::random_generator()());
 
     Plane plane(name, x, y);
-
+    control->connections.connect(plane);
     StartPlane(plane);
-
-    return plane; // Maybe return pointer to plane?
 }
 
 void PlaneGenerator::StartPlane(Plane plane)

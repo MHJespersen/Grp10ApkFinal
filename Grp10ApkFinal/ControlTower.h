@@ -36,8 +36,10 @@ public:
 		inline T operator()(InputIterator first, InputIterator last) const
 		{
 			vector<Plane*> vec(first, last);
+			cout << vec.size() << endl;
 			if (vec.size() > 0)
-			{
+			{	
+				cout << "Calling from controltower" << endl;
 				//WORK
 			}
 		};
