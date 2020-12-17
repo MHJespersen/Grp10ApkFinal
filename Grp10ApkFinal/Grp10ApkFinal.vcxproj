@@ -26,6 +26,7 @@
     <ClCompile Include="Grp10ApkFinal.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PlaneGenerator.cpp" />
+    <ClCompile Include="WarningLogger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="ControlTower.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PlaneGenerator.h" />
+    <ClInclude Include="WarningLogger.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
