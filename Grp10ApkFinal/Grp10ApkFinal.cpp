@@ -18,22 +18,6 @@
 
 using namespace std;
 
-/*oid test(mutex& m1, mutex& m2)
-{
-    vector<Plane> PlaneVec;
-    ControlTower* control = ControlTower::getInstance();
-
-    while (true)
-    {
-        if (control->connections.num_slots() < 10)
-        {
-            PlaneGenerator planeGenerator;
-            Plane myPlane = planeGenerator.GeneratePlane();
-            control->connections.connect(myPlane);
-            this_thread::sleep_for(std::chrono::seconds(3));
-        }
-    }
-}*/
 
 int main(int argc, const char* argv[])
 {
