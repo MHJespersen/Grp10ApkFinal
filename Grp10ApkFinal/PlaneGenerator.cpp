@@ -20,39 +20,45 @@ void PlaneGenerator::GeneratePlane()
 {
     ControlTower* control = ControlTower::getInstance();
     // Determine which axis to on
-    bool axis = rand() % 1; // Random true or false. false = x, true = y
-    // Determine which side to start
-    bool startAtEnd = rand() % 1; // Random true or false. false = start, true = end
-
-    int x;
-    int y;
-
-    // If start on y-axis
-    if(axis)
+    while (true)
     {
-        x = 0;
-        y = rand() % 100; // random number between 0 - 100;
-        if(startAtEnd)
+        if (control->connections.num_slots() < 10)
         {
-            x = 100;
-        }
-    }    
-    else // else start on x-axis
-    {
-        x = rand() % 100; // random number between 0 - 100;
-        y = 0;
-        if(startAtEnd)
-        {
-            y = 100;
-        }
-    }     
+            bool axis = rand() % 1; // Random true or false. false = x, true = y
+            // Determine which side to start
+            bool startAtEnd = rand() % 1; // Random true or false. false = start, true = end
 
-    // Generate unique name
-    const std::string name = boost::uuids::to_string(boost::uuids::random_generator()());
+            int x;
+            int y;
 
-    Plane plane(name, x, y);
-    control->connections.connect(plane);
-    StartPlane(plane);
+            // If start on y-axis
+            if (axis)
+            {
+                x = 0;
+                y = rand() % 100; // random number between 0 - 100;
+                if (startAtEnd)
+                {
+                    x = 100;
+                }
+            }
+            else // else start on x-axis
+            {
+                x = rand() % 100; // random number between 0 - 100;
+                y = 0;
+                if (startAtEnd)
+                {
+                    y = 100;
+                }
+            }
+
+            // Generate unique name
+            const std::string name = boost::uuids::to_string(boost::uuids::random_generator()());
+
+            Plane plane(name, x, y);
+            control->connections.connect(plane);
+            StartPlane(plane);
+        }
+    }
 }
 
 void PlaneGenerator::StartPlane(Plane plane)
