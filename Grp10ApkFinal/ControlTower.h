@@ -15,18 +15,36 @@
 
 using namespace std;
 
+
+
+
 class ControlTower
 {
 private:
 	static ControlTower* instance;
 	std::vector<Plane> Planes;
-	//	CalculatorDistance distanceCalc;
-	//	CalculatorSpeed speedCalc;
+	//Calculator calc;
 	ControlTower();
 
 public:
+	template<typename T>
+	struct PlaneCombiner
+	{
+		typedef T result_type;
+
+		template<typename InputIterator>
+		inline T operator()(InputIterator first, InputIterator last) const
+		{
+			vector<Plane*> vec(first, last);
+			if (vec.size() > 0)
+			{
+				//WORK
+			}
+		};
+	};
+
 	static ControlTower* getInstance();
-	boost::signals2::signal<void()> connections;
+	boost::signals2::signal<Plane*(), PlaneCombiner<void>> connections; //signal med combiner
 	void CheckAirspace(); //std::vector<Plane>, mutex&, mutex&
 	void WriteLog();
-};
+};	
