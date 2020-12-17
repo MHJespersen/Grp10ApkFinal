@@ -19,9 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CalculatorCourse.cpp" />
-    <ClCompile Include="CalculatorDistance.cpp" />
-    <ClCompile Include="CalculatorSpeed.cpp" />
     <ClCompile Include="ControlTower.cpp" />
     <ClCompile Include="Grp10ApkFinal.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -30,8 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h" />
-    <ClInclude Include="CalculatorCourse.h" />
-    <ClInclude Include="CalculatorDistance.h" />
     <ClInclude Include="CalculatorSpeed.h" />
     <ClInclude Include="ControlTower.h" />
     <ClInclude Include="Plane.h" />
