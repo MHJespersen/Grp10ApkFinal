@@ -1,0 +1,31 @@
+
+Vi skal minimum have 75% = 14-15 emner
+
+Emner:
+Lektion 1-3:
+	Namespaces
+	Templates
+Lektion 4:
+	STL Algorithms
+	STL Containers
+	STL Iterators
+Lektion 5:
+	Boost
+	Std Bind
+	Std Function
+	Std Variant
+Lektion 6:
+	Exceptions
+Lektion 7-8:
+	Compile time if
+	Literals
+	Moving
+	Promises + futures
+	Threading
+	Variadics
+Lektion 9-10:
+	Memory mapped registers
+	Meta programmering
+Lektion 11:
+	PMR (Polymorphic Memory Resource)
+
