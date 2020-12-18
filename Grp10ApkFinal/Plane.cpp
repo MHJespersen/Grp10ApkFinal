@@ -114,11 +114,6 @@ void Plane::PrintLocation()
 	std::cout << "Plane : " + nametag + " LOCATION : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
 }
 
-void Plane::SetConnection(boost::signals2::connection c)
-{
-	connection = c;
-}
-
 Plane* Plane::operator()()
 {
 	return this;

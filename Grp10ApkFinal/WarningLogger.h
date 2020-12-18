@@ -5,13 +5,13 @@ using namespace std;
 #include "Plane.h"
 
 
-class WarningLogger
-{
-private:
-	vector<string> tagList;
-	ofstream warningsFile;
-
-public:
-	void WriteWarning(Plane prevPlane, Plane newPlane);
-
-};
+//class WarningLogger
+//{
+//private:
+//	vector<string> tagList;
+//	ofstream warningsFile;
+//
+//public:
+//	void WriteWarning(Plane prevPlane, Plane newPlane);
+//
+//};

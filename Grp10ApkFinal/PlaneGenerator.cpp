@@ -59,14 +59,14 @@ void PlaneGenerator::GeneratePlane()
 
             Plane plane(name, x, y);
             boost::signals2::connection c = control->connections.connect(plane);
-            plane.setConnection(c);
+            //plane.setConnection(c);
             cout << control->connections.num_slots() << endl;
             //StartPlane(plane);
-            // Start async thread running a plane
+            //Start async thread running a plane
             //std::thread(&PlaneGenerator::StartPlane, this, plane).detach();
         }
         // Wait n seconds before running again
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        //std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
 
