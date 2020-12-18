@@ -26,11 +26,7 @@ struct PlaneCombiner
 				std::cout << plane->nametag << " :: " << plane->xcoordinate << std::endl;
 			}
 		}
-		//if (ControlTower::previousSignals.empty())
-		//{
-		//	cout << "test signal" << endl;
-		//}
-		return T(PlaneList);
+		return PlaneList;
 	};
 };
 
@@ -39,15 +35,20 @@ class ControlTower
 private:
 	static ControlTower* instance;
 	ControlTower();
-	//Liste af fly fra sidste signal. Gem kun de sidst observerede informationer
 	list<Plane*> previousSignals;
 	//giv adgang til private attributter
+	//template<typename T> friend struct PlaneCombiner;
 
 public:
-	//template<typename T> friend struct PlaneCombiner;
 	static ControlTower* getInstance();
 	//signal med combiner
 	boost::signals2::signal<Plane*(), PlaneCombiner<list<Plane*>>> connections; 
 	void CheckAirspace(); //std::vector<Plane>, mutex&, mutex&
 	void WriteLog();
 };	
+
+
+//if (ControlTower::previousSignals.empty())
+//{
+//	cout << "test signal" << endl;
+//}
