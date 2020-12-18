@@ -1,10 +1,12 @@
 #include "PlaneGenerator.h"
+#include "ControlTower.h"
 #include <cstdlib>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
 #include <thread>
-#include "ControlTower.h"
+
+
 const int NORTH = 0;
 const int SOUTH = 1;
 const int EAST = 2;
@@ -19,14 +21,15 @@ PlaneGenerator::PlaneGenerator()
 void PlaneGenerator::GeneratePlane()
 {
     ControlTower* control = ControlTower::getInstance();
-    // Determine which axis to on
+    
     while (true)
     {
         if (control->connections.num_slots() < 10)
         {
-            bool axis = rand() % 1; // Random true or false. false = x, true = y
+            // Determine which axis to start on
+            bool axis = rand() % 2; // Random true or false. false = x, true = y
             // Determine which side to start
-            bool startAtEnd = rand() % 1; // Random true or false. false = start, true = end
+            bool startAtEnd = rand() % 2; // Random true or false. false = start, true = end
 
             int x;
             int y;
@@ -55,16 +58,21 @@ void PlaneGenerator::GeneratePlane()
             const std::string name = boost::uuids::to_string(boost::uuids::random_generator()());
 
             Plane plane(name, x, y);
-            control->connections.connect(plane);
-            StartPlane(plane);
+            auto c = control->connections.connect(plane);
+            //plane.SetConnection(c);
+
+            // Start async thread running a plane
+            std::thread(&PlaneGenerator::StartPlane, this, plane).detach();
         }
+        // Wait n seconds before running again
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
 
 void PlaneGenerator::StartPlane(Plane plane)
 {
 
-    bool ChooseRandomDirection = rand() % 1;
+    bool ChooseRandomDirection = rand() % 2;
 
     // First check if plane is in corners
     if (plane.xcoordinate == 0 && plane.ycoordinate == 0)
