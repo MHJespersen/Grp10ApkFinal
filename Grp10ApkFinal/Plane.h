@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <time.h> 
+#include <boost/signals2.hpp>
 
 class Plane
 {
@@ -15,15 +16,17 @@ private:
 	void FlyEast();	
 	void FlyWest();
 	void PrintLocation();
+	boost::signals2::connection connection;
 
 public:
 	Plane(std::string name, float x, float y);
-	
 	std::string nametag;
 	float xcoordinate;
 	float ycoordinate;
 	float speed;
 	time_t timestamp;
+	void setConnection(boost::signals2::connection c);
+
 
 	void TakeOff(int Direction);
 	void Land();

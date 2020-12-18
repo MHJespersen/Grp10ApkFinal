@@ -26,7 +26,7 @@ struct PlaneCombiner
 				std::cout << plane->nametag << " :: " << plane->xcoordinate << std::endl;
 			}
 		}
-		return PlaneList;
+		return T(PlaneList);
 	};
 };
 
@@ -36,19 +36,11 @@ private:
 	static ControlTower* instance;
 	ControlTower();
 	list<Plane*> previousSignals;
-	//giv adgang til private attributter
-	//template<typename T> friend struct PlaneCombiner;
 
 public:
 	static ControlTower* getInstance();
 	//signal med combiner
 	boost::signals2::signal<Plane*(), PlaneCombiner<list<Plane*>>> connections; 
-	void CheckAirspace(); //std::vector<Plane>, mutex&, mutex&
+	void CheckAirspace(); //mutex&, mutex&
 	void WriteLog();
 };	
-
-
-//if (ControlTower::previousSignals.empty())
-//{
-//	cout << "test signal" << endl;
-//}

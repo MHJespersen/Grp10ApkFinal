@@ -55,8 +55,10 @@ void PlaneGenerator::GeneratePlane()
             const std::string name = boost::uuids::to_string(boost::uuids::random_generator()());
 
             Plane plane(name, x, y);
-            control->connections.connect(plane);
-            StartPlane(plane);
+            boost::signals2::connection c = control->connections.connect(plane);
+            plane.setConnection(c);
+            cout << control->connections.num_slots() << endl;
+            //StartPlane(plane);
         }
     }
 }
