@@ -8,6 +8,8 @@
 #include "ControlTower.h"
 #include <mutex>
 
+ControlTower* ControlTower::instance;
+
 ControlTower* ControlTower::getInstance()
 {
 	if (!instance)
@@ -22,17 +24,25 @@ ControlTower::ControlTower()
 
 void ControlTower::CheckAirspace() //std::vector<Plane> planes, mutex& m1, mutex& m2
 {
+	list<Plane*> current;	
 	while (true)
 	{
-		this->connections();
-		this_thread::sleep_for(std::chrono::seconds(3));
+		if (previousSignals.empty())
+			previousSignals = this->connections(); //føste kald
 
-		//Calculate distance, make exception (in distance calculator) if planes are too close
-		//if excepion is called, write logfile
+		else
+		{
+			if (!current.empty())
+			{
+				previousSignals = current; //Alle kald efter #2  --- Brug noget copy fra apk?
+			}
+			current = this->connections(); //andet kald
+		}
+
+		this_thread::sleep_for(std::chrono::seconds(3));
 	}
 }
 
 void ControlTower::WriteLog()
 {
 }
-ControlTower* ControlTower::instance;
