@@ -26,6 +26,11 @@ Plane::~Plane()
 	connection.disconnect();
 }
 
+void Plane::setConnection(boost::signals2::connection c)
+{
+	this->connection = c;
+}
+
 void Plane::TakeOff(int Direction)
 {
 	std::cout << "Plane : " + nametag + " has TAKEN OFF at : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;

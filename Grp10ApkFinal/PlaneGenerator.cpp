@@ -58,11 +58,12 @@ void PlaneGenerator::GeneratePlane()
             const std::string name = boost::uuids::to_string(boost::uuids::random_generator()());
 
             Plane plane(name, x, y);
-            auto c = control->connections.connect(plane);
-            //plane.SetConnection(c);
-
+            boost::signals2::connection c = control->connections.connect(plane);
+            plane.setConnection(c);
+            cout << control->connections.num_slots() << endl;
+            //StartPlane(plane);
             // Start async thread running a plane
-            std::thread(&PlaneGenerator::StartPlane, this, plane).detach();
+            //std::thread(&PlaneGenerator::StartPlane, this, plane).detach();
         }
         // Wait n seconds before running again
         std::this_thread::sleep_for(std::chrono::seconds(1));
