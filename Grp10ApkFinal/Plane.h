@@ -20,16 +20,13 @@ private:
 
 public:
 	Plane(std::string name, float x, float y);
-	~Plane();
-	
+
 	std::string nametag;
 	float xcoordinate;
 	float ycoordinate;
 	float speed;
 	time_t timestamp;
 	void setConnection(boost::signals2::connection c);
-
-
 	void TakeOff(int Direction);
 	void Land();
 	Plane* operator()();

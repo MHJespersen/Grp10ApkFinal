@@ -2,7 +2,7 @@
 #include "PlaneGenerator.h"
 #include "ControlTower.h"
 #include <math.h>
-#include "Calculator.h"
+//#include "Calculator.h"
 
 using namespace std;
 

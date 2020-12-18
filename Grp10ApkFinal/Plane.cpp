@@ -21,11 +21,6 @@ Plane::Plane(std::string name, float x, float y)
 	speed = (float) rand() / RAND_MAX + 1; // speed as float between 1 and 2.
 }
 
-Plane::~Plane()
-{
-	connection.disconnect();
-}
-
 void Plane::setConnection(boost::signals2::connection c)
 {
 	this->connection = c;
@@ -55,6 +50,7 @@ void Plane::Land()
 {
 	// Delete plane or give msg to subscriber that fly has landed etc
 	std::cout << "Plane : " + nametag + " has LANDED at : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
+	this->connection.disconnect();
 }
 
 void Plane::FlyNorth()
