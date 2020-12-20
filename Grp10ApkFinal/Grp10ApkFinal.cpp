@@ -13,5 +13,26 @@ int main()
     t1.join();
     t2.join();
 
+//Testing Calculator and Logger
+/*
+Plane p1 = Plane("p1", 1, 1);
+Plane p2 = Plane("p2", 1, 3);
+
+Calculator<Plane> dummy;
+
+cout << dummy.distanceCalculator(p1, p2) << endl;
+
+cout << dummy.courseCalculator(p1, p2) << endl;
+
+Sleep(10);
+
+cout << dummy.speedCalculator(p1, p2) << endl;
+
+Plane p3 = Plane("p3", 1, 1);
+Plane p4 = Plane("p4", 1, 1);
+
+WarningLogger log;
+log.WriteWarning(p3, p4);
+*/
     return 0;
 }

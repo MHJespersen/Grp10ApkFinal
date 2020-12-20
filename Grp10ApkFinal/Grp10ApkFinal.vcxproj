@@ -27,7 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h" />
-    <ClInclude Include="CalculatorSpeed.h" />
     <ClInclude Include="ControlTower.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PlaneGenerator.h" />

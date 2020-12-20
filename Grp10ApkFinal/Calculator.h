@@ -4,39 +4,45 @@
 
 using namespace std;
 
-/*
-template<class T1, class T2>
-int distanceCalculator(T1 newPlane, T2 prevPlane)
+template<class T>
+class Calculator
 {
-	return sqrt(pow(prevPlane.xcoordinate - newPlane.xcoordinate, 2) + pow(prevPlane.ycoordinate - newPlane.ycoordinate, 2));
-}
+private:
+	int timeStamps;
+	float speed;
+	float pi = 2 * acos(0.0);
+	double courseInRadians;
+	double degrees;
 
-template<class T1, class T2>
-int speedCalculator(T1 newPlane, T2 prevPlane)
-{
-	timeStamps = (prevPlane.now - newPlane.now);
-	distance = distanceCalculator(prevPlane, newPlane);
-	speed = distance / timeStamps;
-	if (speed < 0)
+public:
+	float distanceCalculator(T newPlane, T prevPlane)
 	{
-		speed *= -1;
+		return sqrt(pow(prevPlane.xcoordinate - newPlane.xcoordinate, 2) + pow(prevPlane.ycoordinate - newPlane.ycoordinate, 2));
 	}
-	return speed;
-}
 
-template<class T1, class T2>
-int courseCalculator(T1 newPlane, T2 prevPlane)
-{
-	courseInRadians = atan2(newPlane.xcoordinate - prevPlane.xcoordinate, newPlane.ycoordinate - prevPlane.ycoordinate);
-	pi = 2 * acos(0.0);
-	degrees = 180 / pi * courseInRadians;
-	if (degrees < 0)
+	float speedCalculator(T newPlane, T prevPlane)
 	{
-		degrees = degrees + 360;
+		timeStamps = (prevPlane.timestamp - newPlane.timestamp);
+		speed = distanceCalculator(prevPlane, newPlane) / timeStamps;
+		if (speed < 0)
+		{
+			speed *= -1;
+		}
+		return speed;
 	}
-	return degrees;
-}
-*/
+
+	int courseCalculator(T newPlane, T prevPlane)
+	{
+		courseInRadians = atan2(newPlane.xcoordinate - prevPlane.xcoordinate, newPlane.ycoordinate - prevPlane.ycoordinate);
+		degrees = 180 / pi * courseInRadians;
+		if (degrees < 0)
+		{
+			degrees = degrees + 360;
+		}
+		return degrees;
+	}
+
+};
 
 //template <class T>
 //class Calculator {

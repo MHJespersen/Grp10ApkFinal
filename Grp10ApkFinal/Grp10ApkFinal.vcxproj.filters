@@ -38,9 +38,6 @@
     <ClInclude Include="PlaneGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CalculatorSpeed.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ControlTower.h">
       <Filter>Header Files</Filter>
     </ClInclude>
