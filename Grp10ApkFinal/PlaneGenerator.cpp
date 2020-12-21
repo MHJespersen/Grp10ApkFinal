@@ -15,16 +15,15 @@ const int WEST = 3;
 PlaneGenerator::PlaneGenerator()
 {
     // Set random seed for random generator
+    control = ControlTower::getInstance();
     srand(time(NULL));
 }
 
 void PlaneGenerator::GeneratePlane()
 {
-    ControlTower* control = ControlTower::getInstance();
-    
     while (true)
     {
-        if (control->connections.num_slots() < 3)
+        if (control->connections.num_slots() < 6)
         {
             // Determine which axis to start on
             bool axis = rand() % 2; // Random true or false. false = x, true = y
@@ -60,16 +59,13 @@ void PlaneGenerator::GeneratePlane()
             std::thread(&PlaneGenerator::StartPlane, this, plane).detach();
         }
         // Wait n seconds before running again
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
 }
 
 void PlaneGenerator::StartPlane(Plane plane)
 {
-    ControlTower* control = ControlTower::getInstance();
-
     bool ChooseRandomDirection = rand() % 2;
-
     boost::signals2::connection c = control->connections.connect(std::ref(plane));
     plane.setConnection(c);
     // First check if plane is in corners

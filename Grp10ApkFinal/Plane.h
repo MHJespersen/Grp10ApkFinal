@@ -18,6 +18,20 @@ private:
 	void PrintLocation();
 
 public:
+	bool operator==(const Plane* other) {
+		return nametag == other->nametag;
+	}
+	//Plane& operator=(const Plane* other)
+	//{
+	//	if (this == other)
+	//		return *this;
+
+	//	this->nametag = other->nametag;
+	//	this->xcoordinate = other->xcoordinate;
+	//	this->ycoordinate = other->ycoordinate;
+	//	this->speed = other->speed;
+	//	return *this;
+	//}
 	boost::signals2::connection connection;
 	Plane(std::string name, float x, float y);
 	~Plane();
@@ -31,3 +45,4 @@ public:
 	void Land();
 	Plane* operator()();
 };
+

@@ -10,16 +10,22 @@
 #include <thread>
 
 ControlTower* ControlTower::instance;
-
-bool ControlTower::isInAirspace(Plane* plane)
+//auto delIt = find_if(previousSignals.begin(), previousSignals.end(), [&Nametag](Plane obj) {return obj.nametag == Nametag; });
+bool ControlTower::isInAirspace(list<Plane*> currentPlanes)
 {
-	if (plane->connection.connected() && plane->xcoordinate <= 100 && plane->ycoordinate <= 100)
-		return true;
-	else
+
+	for (auto p = previousSignals.begin(); p != previousSignals.end(); p++)
 	{
-		previousSignals.remove(plane);
-		return false;
-	}
+		//Check if old signal is still valid
+		auto it = find_if(currentPlanes.begin(), currentPlanes.end(), [p](Plane* obj) {return obj->nametag == p->nametag; });
+		if (it == currentPlanes.end()) {
+			//Old signal is no longer valid, delete unused object
+			previousSignals.erase(p);
+			break;
+		}
+	};
+
+	return true;
 }
 
 ControlTower* ControlTower::getInstance()
@@ -36,56 +42,47 @@ ControlTower::ControlTower()
 
 void ControlTower::CheckAirspace() //std::vector<Plane> planes, mutex& m1, mutex& m2
 {
-	list<Plane*> currentSignals;	
+	list<Plane*> currentSignals;
 	while (true)
 	{
-		//kald #1
-		if (previousSignals.empty()) 
-			previousSignals = this->connections();
-
-		//kald #2
-		else 
+		if (previousSignals.empty())
 		{
-			if (currentSignals.empty())
-				currentSignals = this->connections();
-
-			//Alle kald efter #2
-			else 
+			currentSignals = connections();
+			if (!currentSignals.empty())
 			{
-				previousSignals.assign(currentSignals.begin(), currentSignals.end());
-				currentSignals = this->connections();
-
-				//beregn hastighed og distancer
-				for (auto c = currentSignals.cbegin(), p = previousSignals.cbegin();
-					c != currentSignals.cend() && p != previousSignals.cend(); ++c, ++p)
+				std::transform(currentSignals.begin(), currentSignals.end(),std::back_inserter(previousSignals),[](Plane* p) { return *p; });
+				currentSignals = connections();
+			}
+		}
+		else
+		{
+			previousSignals.clear();
+			std::transform(currentSignals.begin(), currentSignals.end(), std::back_inserter(previousSignals), [](Plane* p) { return *p; });
+			std::this_thread::sleep_for(std::chrono::seconds(3));
+			currentSignals = connections();
+			isInAirspace(currentSignals);
+			for (auto c = currentSignals.begin(); c != currentSignals.end(); c++)
+			{
+				for (auto p = previousSignals.begin(); p != previousSignals.end(); p++)
 				{
-					for (auto cu = currentSignals.cbegin(), pe = previousSignals.cbegin();
-						cu != currentSignals.cend() && pe != previousSignals.cend(); ++cu, ++pe)
+					if ((*c)->nametag == p->nametag)
 					{
-						if (isInAirspace((*c)) && isInAirspace((*pe)))
+						//Omregn mph?
+						cout << "Plane: " << (*c)->nametag << " is flyting with : " << Calculator.speedCalculator((*c), &(*p)) << " mp/h" << endl;
+					}
+					else
+					{
+						float distance = Calculator.distanceCalculator((*c), &(*p));
+						cout << "Distance between " << (*c)->nametag << " and " << p->nametag << " is : " << distance << endl;
+						if (distance < 5)
 						{
-							//cout << "Planes:" << endl;
-							//cout << (*cu)->nametag << " x: " << (*cu)->xcoordinate << " y: " << (*cu)->ycoordinate << " Current" << endl; 
-							//cout << (*pe)->nametag << " x: " << (*pe)->xcoordinate << " y: " << (*pe)->ycoordinate << " Previous" << endl;
-	
-							if ((*c)->nametag == ((*pe)->nametag))
-							{
-								//der er nok brugt nogle forskellige timestamps, ser ikke ud til vi kan bruge den vi har nu til beregning. Ellers skal beregning ændres
-								//hvad har mikkel burgt til at teste?
-								//cout << "Planetag: " << (*c)->nametag << " flies with " <<  Calculator.speedCalculator((*c), (*p)) << " mp/h" << endl;
-							}
-							else
-							{
-								//Hvis et fly disconnector sig her, vil vi crashe her. Sørg for at listen kun indeholder fly som er connected.
-								//cout << "Distance between " << (*c)->nametag << " and " << (*p)->nametag << ": " << Calculator.courseCalculator((*c), (*p)) << endl;
-							}
+							cout << "WARNING" << endl; //write log
 						}
-
 					}
 				}
 			}
-		}	
-		this_thread::sleep_for(std::chrono::seconds(3));
+
+		}
 	}
 }
 

@@ -22,11 +22,11 @@ struct PlaneCombiner
 		list<Plane*> PlaneList(first, last);
 		if (!PlaneList.empty())
 		{
-			for (auto c = PlaneList.cbegin(), p = PlaneList.cbegin();
-				c != PlaneList.cend() && p != PlaneList.cend(); ++c, ++p)
-			{
-				cout << (*c)->nametag << " position x: " << (*c)->xcoordinate << " postion y: " << (*c)->ycoordinate << endl;
-			}
+			//for (auto c = PlaneList.cbegin(), p = PlaneList.cbegin();
+			//	c != PlaneList.cend() && p != PlaneList.cend(); ++c, ++p)
+			//{
+			//	cout << (*c)->nametag << " position x: " << (*c)->xcoordinate << " postion y: " << (*c)->ycoordinate << endl;
+			//}
 		}
 		return T(PlaneList);
 	};
@@ -37,14 +37,14 @@ class ControlTower
 private:
 	static ControlTower* instance;
 	ControlTower();
-	list<Plane*> previousSignals;
+	list<Plane> previousSignals;
 	Calculator<Plane> Calculator;
 
 public:
-	bool isInAirspace(Plane*);
+	bool isInAirspace(list<Plane*>);
 	static ControlTower* getInstance();
 	//signal med combiner
 	boost::signals2::signal<Plane*(), PlaneCombiner<list<Plane*>>> connections; 
-	void CheckAirspace(); //mutex&, mutex&
+	void CheckAirspace();
 	void WriteLog();
 };	
