@@ -16,11 +16,11 @@ private:
 	void FlyEast();	
 	void FlyWest();
 	void PrintLocation();
-	boost::signals2::connection connection;
 
 public:
+	boost::signals2::connection connection;
 	Plane(std::string name, float x, float y);
-
+	~Plane();
 	std::string nametag;
 	float xcoordinate;
 	float ycoordinate;

@@ -22,7 +22,11 @@ struct PlaneCombiner
 		list<Plane*> PlaneList(first, last);
 		if (!PlaneList.empty())
 		{
-			//std::sort(PlaneList.begin(), PlaneList.end());
+			for (auto c = PlaneList.cbegin(), p = PlaneList.cbegin();
+				c != PlaneList.cend() && p != PlaneList.cend(); ++c, ++p)
+			{
+				cout << (*c)->nametag << " position x: " << (*c)->xcoordinate << " postion y: " << (*c)->ycoordinate << endl;
+			}
 		}
 		return T(PlaneList);
 	};

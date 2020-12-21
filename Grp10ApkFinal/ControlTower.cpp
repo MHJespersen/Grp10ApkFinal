@@ -13,7 +13,13 @@ ControlTower* ControlTower::instance;
 
 bool ControlTower::isInAirspace(Plane* plane)
 {
-	return (plane->xcoordinate <= 100 && plane->ycoordinate <= 100);
+	if (plane->connection.connected() && plane->xcoordinate <= 100 && plane->ycoordinate <= 100)
+		return true;
+	else
+	{
+		previousSignals.remove(plane);
+		return false;
+	}
 }
 
 ControlTower* ControlTower::getInstance()
@@ -43,7 +49,7 @@ void ControlTower::CheckAirspace() //std::vector<Plane> planes, mutex& m1, mutex
 			if (currentSignals.empty())
 				currentSignals = this->connections();
 
-			//Alle kald efter #2  --- Brug noget copy fra apk?
+			//Alle kald efter #2
 			else 
 			{
 				previousSignals.assign(currentSignals.begin(), currentSignals.end());
@@ -58,23 +64,23 @@ void ControlTower::CheckAirspace() //std::vector<Plane> planes, mutex& m1, mutex
 					{
 						if (isInAirspace((*c)) && isInAirspace((*pe)))
 						{
-							cout << "Planes:" << endl;
-							cout << (*cu)->nametag << " x: " << (*cu)->xcoordinate << " y: " << (*cu)->ycoordinate << " Current" << endl; 
-							cout << (*pe)->nametag << " x: " << (*pe)->xcoordinate << " y: " << (*pe)->ycoordinate << " Previous" << endl;
-						}
+							//cout << "Planes:" << endl;
+							//cout << (*cu)->nametag << " x: " << (*cu)->xcoordinate << " y: " << (*cu)->ycoordinate << " Current" << endl; 
+							//cout << (*pe)->nametag << " x: " << (*pe)->xcoordinate << " y: " << (*pe)->ycoordinate << " Previous" << endl;
 	
-						//if ((*c)->nametag == ((*pe)->nametag))
-						//{
-						//	//der er nok brugt nogle forskellige timestamps, ser ikke ud til vi kan bruge den vi har nu til beregning. Ellers skal beregning ændres
-						//	//hvad har mikkel burgt til at teste?
-						//	//cout << "Planetag: " << (*c)->nametag << " flies with " <<  Calculator.speedCalculator((*c), (*p)) << " mp/h" << endl;
-						//}
-						//else
-						//{
-						//	//Hvis et fly disconnector sig her, vil vi crashe her. Sørg for at listen kun indeholder fly som er connected.
-						//	//if(connections.)
-						//	//cout << "Distance between " << (*c)->nametag << " and " << (*p)->nametag << ": " << Calculator.courseCalculator((*c), (*p)) << endl;
-						//}
+							if ((*c)->nametag == ((*pe)->nametag))
+							{
+								//der er nok brugt nogle forskellige timestamps, ser ikke ud til vi kan bruge den vi har nu til beregning. Ellers skal beregning ændres
+								//hvad har mikkel burgt til at teste?
+								//cout << "Planetag: " << (*c)->nametag << " flies with " <<  Calculator.speedCalculator((*c), (*p)) << " mp/h" << endl;
+							}
+							else
+							{
+								//Hvis et fly disconnector sig her, vil vi crashe her. Sørg for at listen kun indeholder fly som er connected.
+								//cout << "Distance between " << (*c)->nametag << " and " << (*p)->nametag << ": " << Calculator.courseCalculator((*c), (*p)) << endl;
+							}
+						}
+
 					}
 				}
 			}

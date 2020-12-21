@@ -24,7 +24,7 @@ void PlaneGenerator::GeneratePlane()
     
     while (true)
     {
-        if (control->connections.num_slots() < 10)
+        if (control->connections.num_slots() < 3)
         {
             // Determine which axis to start on
             bool axis = rand() % 2; // Random true or false. false = x, true = y
@@ -53,16 +53,10 @@ void PlaneGenerator::GeneratePlane()
                     y = 100;
                 }
             }
-
             // Generate unique name
             const std::string name = boost::uuids::to_string(boost::uuids::random_generator()());
 
             Plane plane(name, x, y);
-            boost::signals2::connection c = control->connections.connect(plane);
-            plane.setConnection(c);
-            cout << control->connections.num_slots() << endl;
-            //StartPlane(plane);
-            //Start async thread running a plane
             std::thread(&PlaneGenerator::StartPlane, this, plane).detach();
         }
         // Wait n seconds before running again
@@ -72,9 +66,12 @@ void PlaneGenerator::GeneratePlane()
 
 void PlaneGenerator::StartPlane(Plane plane)
 {
+    ControlTower* control = ControlTower::getInstance();
 
     bool ChooseRandomDirection = rand() % 2;
 
+    boost::signals2::connection c = control->connections.connect(std::ref(plane));
+    plane.setConnection(c);
     // First check if plane is in corners
     if (plane.xcoordinate == 0 && plane.ycoordinate == 0)
     {

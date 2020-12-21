@@ -50,7 +50,6 @@ void Plane::Land()
 {
 	// Delete plane or give msg to subscriber that fly has landed etc
 	std::cout << "Plane : " + nametag + " has LANDED at : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
-	this->connection.disconnect();
 }
 
 void Plane::FlyNorth()
@@ -107,7 +106,13 @@ void Plane::FlyWest()
 
 void Plane::PrintLocation()
 {
-	std::cout << "Plane : " + nametag + " LOCATION : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
+	//std::cout << "Plane : " + nametag + " LOCATION : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
+}
+
+Plane::~Plane()
+{
+	std::cout << "Destroyed " << nametag << std::endl;
+	connection.disconnect();
 }
 
 Plane* Plane::operator()()
