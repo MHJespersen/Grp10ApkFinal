@@ -2,6 +2,7 @@
 #include <math.h>
 #include "Plane.h"
 
+
 using namespace std;
 
 template<class T>
@@ -11,30 +12,32 @@ private:
 	int timeStamps;
 	float speed;
 	float pi = 2 * acos(0.0);
-	double courseInRadians;
-	double degrees;
+	float courseInRadians;
+	float degrees;
 
 public:
-	float distanceCalculator(T* newPlane, T* prevPlane)
+	auto distanceCalculator(T* newPlane, T* prevPlane)
 	{
-		return sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2));
+		if constexpr(std::is_pointer_v<T>)
+			return *sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2));
+		else
+			return sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2));
 	}
 
 	float speedCalculator(T* newPlane, T* prevPlane)
 	{
 		timeStamps = (prevPlane->timestamp - newPlane->timestamp);
-		try {
-			if(timeStamps == 0)
-			{ 
-				throw "Division by zero not possible!";
-				speed = distanceCalculator(prevPlane, newPlane) / timeStamps;
-			}
-		}
-		catch (char* ex)
+		try 
 		{
-			cout << ex;
+			if (timeStamps == 0) throw(string("Divide by zero error!\n"));
+			speed = distanceCalculator(prevPlane, newPlane) / timeStamps;
+			
 		}
-		if constexpr(speed < 0)
+		catch (const string &e)
+		{
+			cout << "exception caught\n" << e;
+		}
+		if (speed < 0)
 		{
 			speed *= -1;
 			return speed;
@@ -45,31 +48,31 @@ public:
 		}
 	}
 
-	int courseCalculator(T* newPlane, T* prevPlane)
+	float courseCalculator(T* newPlane, T* prevPlane)
 	{
 		courseInRadians = atan2(newPlane->xcoordinate - prevPlane->xcoordinate, newPlane->ycoordinate - prevPlane->ycoordinate);
 		try
 		{
-			if ((pi * courseInRadians) == 0)
-			{
-				
-				throw "Division by zero not possible!"
-				degrees = 180 / pi * courseInRadians;
-			}
+			if (((180 / pi) * courseInRadians) == 0) throw(string("Divide by zero error!\n"));
+			degrees = (180 / pi) * courseInRadians;
 		}
-		catch (char* ex)
+		catch (const string &e)
 		{
-			cout << ex;
+			cout << "Exception caught\n" << e;
 		}
-		if constexpr(degrees < 0)
+		if(degrees < 0)
 		{
 			degrees = degrees + 360;
+			return degrees;
 		}
 		else
 		{
 			return degrees;
 		}
 	}
+
+
+	
 };
 
 //template <class T>
