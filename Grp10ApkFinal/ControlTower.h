@@ -7,6 +7,7 @@
 #include "Plane.h"
 #include <list>
 #include <boost/signals2.hpp>
+#include "Calculator.h"
 
 using namespace std;
 
@@ -21,10 +22,7 @@ struct PlaneCombiner
 		list<Plane*> PlaneList(first, last);
 		if (!PlaneList.empty())
 		{
-			for (const Plane* plane : PlaneList)
-			{
-				std::cout << plane->nametag << " :: " << plane->xcoordinate << std::endl;
-			}
+			//std::sort(PlaneList.begin(), PlaneList.end());
 		}
 		return T(PlaneList);
 	};
@@ -36,8 +34,10 @@ private:
 	static ControlTower* instance;
 	ControlTower();
 	list<Plane*> previousSignals;
+	Calculator<Plane> Calculator;
 
 public:
+	bool isInAirspace(Plane*);
 	static ControlTower* getInstance();
 	//signal med combiner
 	boost::signals2::signal<Plane*(), PlaneCombiner<list<Plane*>>> connections; 
