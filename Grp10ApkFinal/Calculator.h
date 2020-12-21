@@ -15,14 +15,14 @@ private:
 	double degrees;
 
 public:
-	float distanceCalculator(T newPlane, T prevPlane)
+	float distanceCalculator(T* newPlane, T* prevPlane)
 	{
-		return sqrt(pow(prevPlane.xcoordinate - newPlane.xcoordinate, 2) + pow(prevPlane.ycoordinate - newPlane.ycoordinate, 2));
+		return sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2));
 	}
 
-	float speedCalculator(T newPlane, T prevPlane)
+	float speedCalculator(T* newPlane, T* prevPlane)
 	{
-		timeStamps = (prevPlane.timestamp - newPlane.timestamp);
+		timeStamps = (prevPlane->timestamp - newPlane->timestamp);
 		speed = distanceCalculator(prevPlane, newPlane) / timeStamps;
 		if (speed < 0)
 		{
@@ -31,9 +31,9 @@ public:
 		return speed;
 	}
 
-	int courseCalculator(T newPlane, T prevPlane)
+	int courseCalculator(T* newPlane, T* prevPlane)
 	{
-		courseInRadians = atan2(newPlane.xcoordinate - prevPlane.xcoordinate, newPlane.ycoordinate - prevPlane.ycoordinate);
+		courseInRadians = atan2(newPlane->xcoordinate - prevPlane->xcoordinate, newPlane->ycoordinate - prevPlane->ycoordinate);
 		degrees = 180 / pi * courseInRadians;
 		if (degrees < 0)
 		{
