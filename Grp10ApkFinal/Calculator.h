@@ -23,25 +23,53 @@ public:
 	float speedCalculator(T* newPlane, T* prevPlane)
 	{
 		timeStamps = (prevPlane->timestamp - newPlane->timestamp);
-		speed = distanceCalculator(prevPlane, newPlane) / timeStamps;
-		if (speed < 0)
+		try {
+			if(timeStamps == 0)
+			{ 
+				throw "Division by zero not possible!";
+				speed = distanceCalculator(prevPlane, newPlane) / timeStamps;
+			}
+		}
+		catch (char* ex)
+		{
+			cout << ex;
+		}
+		if constexpr(speed < 0)
 		{
 			speed *= -1;
+			return speed;
 		}
-		return speed;
+		else
+		{
+			return speed;
+		}
 	}
 
 	int courseCalculator(T* newPlane, T* prevPlane)
 	{
 		courseInRadians = atan2(newPlane->xcoordinate - prevPlane->xcoordinate, newPlane->ycoordinate - prevPlane->ycoordinate);
-		degrees = 180 / pi * courseInRadians;
-		if (degrees < 0)
+		try
+		{
+			if ((pi * courseInRadians) == 0)
+			{
+				
+				throw "Division by zero not possible!"
+				degrees = 180 / pi * courseInRadians;
+			}
+		}
+		catch (char* ex)
+		{
+			cout << ex;
+		}
+		if constexpr(degrees < 0)
 		{
 			degrees = degrees + 360;
 		}
-		return degrees;
+		else
+		{
+			return degrees;
+		}
 	}
-
 };
 
 //template <class T>
