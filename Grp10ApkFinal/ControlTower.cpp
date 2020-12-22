@@ -8,6 +8,7 @@
 #include <thread>
 #include "Calculator.h"
 #include "Plane.h"
+#include <future>
 
 using namespace Airplanes;
 
@@ -77,7 +78,13 @@ namespace Airspace
 	}
 	void ControlTower::checkDistance(Plane* cu, Plane* pre)
 	{
-		float distance = calculator.distanceCalculator(cu, pre);
+		//define the promise
+		std::promise<float> distPromise;
+		//get the future
+		std::future<float> distResult = distPromise.get_future();
+
+		calculator.distanceCalculator(std::move(distPromise), cu, pre);
+		float distance = distResult.get();
 		cout << "Distance between " << cu->nametag << " and " << pre->nametag << " is : " << distance << endl;
 		if (distance < 6)
 		{

@@ -2,7 +2,8 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 #endif
-#include <math.h>
+#include <future>
+
 using namespace Airplanes;
 namespace Airspace
 {
@@ -18,7 +19,8 @@ namespace Airspace
 
 	public:
 		Calculator();
-		float distanceCalculator(T* newPlane, T* prevPlane);
+		void distanceCalculator(std::promise<float>&& floatPromise, T* newPlane, T* prevPlane);
+		//float distanceCalculator(T* newPlane, T* prevPlane);
 		float speedCalculator(T* newPlane, T* prevPlane);
 		float courseCalculator(T* newPlane, T* prevPlane);
 	};
@@ -27,21 +29,28 @@ namespace Airspace
 	{
 	}
 	template<class T>
-	inline float Calculator<T>::distanceCalculator(T* newPlane, T* prevPlane)
+	inline void Calculator<T>::distanceCalculator(std::promise<float>&& floatPromise, T* newPlane, T* prevPlane)
 	{
 		if constexpr (std::is_pointer<Plane*>::value)
-			return sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2));
+			floatPromise.set_value(sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2)));
 		else
 			throw(std::string("Not implemented for this type!\n"));
 	}
+
+
 	template<class T>
 	inline float Calculator<T>::speedCalculator(T* newPlane, T* prevPlane)
 	{
+		//define the promise
+		std::promise<float> distPromise;
+		//get the future
+		std::future<float> distResult = distPromise.get_future();
 		timeStamps = (prevPlane->timestamp - newPlane->timestamp);
 		try
 		{
 			if (timeStamps == 0) throw(std::string("Divide by zero error!\n"));
-			speed = distanceCalculator(prevPlane, newPlane) / timeStamps;
+			distanceCalculator(std::move(distPromise), prevPlane, newPlane);
+			speed = distResult.get() / timeStamps;
 
 		}
 		catch (const std::string& e)
