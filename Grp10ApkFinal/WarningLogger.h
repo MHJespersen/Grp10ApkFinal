@@ -14,6 +14,6 @@ private:
 	//std::ofstream warningsFile("warningsFile.txt", std::ios_base::out | std::ios_base::app);
 
 public:
-	void WriteWarning(Plane prevPlane, Plane newPlane);
+	void WriteWarning(Plane* prevPlane, Plane* newPlane);
 
 };

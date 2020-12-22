@@ -8,6 +8,7 @@
 #include <list>
 #include <boost/signals2.hpp>
 #include "Calculator.h"
+#include "WarningLogger.h"
 
 using namespace std;
 
@@ -20,14 +21,6 @@ struct PlaneCombiner
 	inline T operator()(InputIterator first, InputIterator last) const
 	{
 		list<Plane*> PlaneList(first, last);
-		if (!PlaneList.empty())
-		{
-			//for (auto c = PlaneList.cbegin(), p = PlaneList.cbegin();
-			//	c != PlaneList.cend() && p != PlaneList.cend(); ++c, ++p)
-			//{
-			//	cout << (*c)->nametag << " position x: " << (*c)->xcoordinate << " postion y: " << (*c)->ycoordinate << endl;
-			//}
-		}
 		return T(PlaneList);
 	};
 };
@@ -39,12 +32,13 @@ private:
 	ControlTower();
 	list<Plane> previousSignals;
 	Calculator<Plane> Calculator;
+	WarningLogger logger;
 
 public:
 	void isInAirspace(list<Plane*>);
 	static ControlTower* getInstance();
 	//signal med combiner
 	boost::signals2::signal<Plane*(), PlaneCombiner<list<Plane*>>> connections; 
-	void CheckAirspace();
-	void WriteLog();
+	void checkAirspace();
+	void checkDistance(Plane*, Plane*);
 };	
