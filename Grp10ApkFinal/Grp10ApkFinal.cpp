@@ -3,6 +3,8 @@
 #include "ControlTower.h"
 
 using namespace std;
+using namespace Airplanes;
+using namespace Airspace;
 
 int main()
 {
