@@ -3,25 +3,25 @@ Vi skal minimum have 75% = 14-15 emner
 
 Emner:
 Lektion 1-3:
-	Namespaces
-	Templates
+	Namespaces           X
+	Templates            X 
 Lektion 4:
-	STL Algorithms
-	STL Containers
-	STL Iterators
+	STL Algorithms       X 
+	STL Containers       X 
+	STL Iterators        X 
 Lektion 5:
-	Boost
+	Boost                X 
 	Std Bind
-	Std Function
+	Std Function 
 	Std Variant
 Lektion 6:
-	Exceptions
+	Exceptions           X 
 Lektion 7-8:
-	Compile time if
+	Compile time if      X
 	Literals
 	Moving
 	Promises + futures
-	Threading
+	Threading            X
 	Variadics
 Lektion 9-10:
 	Memory mapped registers
