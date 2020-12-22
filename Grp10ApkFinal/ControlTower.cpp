@@ -10,13 +10,17 @@
 #include <thread>
 
 ControlTower* ControlTower::instance;
+
+ControlTower::ControlTower() {}
+
 void ControlTower::isInAirspace(list<Plane*> currentPlanes)
 {
+	//Check if old signal is still valid
 	for (auto pIt = previousSignals.begin(); pIt != previousSignals.end(); pIt++)
 	{
-		//Check if old signal is still valid
 		auto cIt = find_if(currentPlanes.begin(), currentPlanes.end(), [pIt](Plane* obj) {return obj->nametag == pIt->nametag; });
-		if (cIt == currentPlanes.end()) {
+		if (cIt == currentPlanes.end()) 
+		{
 			//Old signal is no longer valid, delete unused object
 			previousSignals.erase(pIt++);
 		}
@@ -28,10 +32,6 @@ ControlTower* ControlTower::getInstance()
 	if (!instance)
 		instance = new ControlTower;
 	return instance;
-}
-
-ControlTower::ControlTower()
-{
 }
 
 void ControlTower::checkAirspace() //std::vector<Plane> planes, mutex& m1, mutex& m2
@@ -60,7 +60,7 @@ void ControlTower::checkAirspace() //std::vector<Plane> planes, mutex& m1, mutex
 				for (list<Plane>::iterator p = previousSignals.begin(); p != previousSignals.end(); p++)
 				{
 					if ((*c)->nametag == p->nametag)
-						cout << "Plane: " << (*c)->nametag << " is flyting with : " << Calculator.speedCalculator((*c), &(*p)) << " mp/h" << endl;
+						cout << "Plane: " << (*c)->nametag << " is flyting with : " << Calculator.speedCalculator((*c), &(*p)) << " km/h" << endl;
 					else
 					{
 						checkDistance((*c), &(*p));

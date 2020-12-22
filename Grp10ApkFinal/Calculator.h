@@ -16,12 +16,12 @@ private:
 	float degrees;
 
 public:
-	auto distanceCalculator(T* newPlane, T* prevPlane)
+	float distanceCalculator(T* newPlane, T* prevPlane)
 	{
-		if constexpr(std::is_pointer_v<T>)
-			return *sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2));
-		else
+		if constexpr (std::is_pointer_v<Plane*>)
 			return sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2));
+		else
+			throw(string("Not implemented for this type!\n"));
 	}
 
 	float speedCalculator(T* newPlane, T* prevPlane)
@@ -40,11 +40,11 @@ public:
 		if (speed < 0)
 		{
 			speed *= -1;
-			return speed;
+			return speed*315;
 		}
 		else
 		{
-			return speed;
+			return speed*315;
 		}
 	}
 
@@ -70,9 +70,6 @@ public:
 			return degrees;
 		}
 	}
-
-
-	
 };
 
 //template <class T>

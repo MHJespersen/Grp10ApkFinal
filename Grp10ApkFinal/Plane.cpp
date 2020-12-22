@@ -29,13 +29,10 @@ Plane& Plane::operator=(const Plane* other)
 
 Plane::Plane(std::string name, float x, float y)
 {
-	// Set random seed for random generator
-    srand(time(NULL));
-
 	nametag = name;
 	xcoordinate = x;
 	ycoordinate = y;
-	speed = 10;//(float) rand() / RAND_MAX + 1; // speed as float between 1 and 2.
+	speed = (float) rand() / RAND_MAX + 1; // speed as float between 1 and 2.
 }
 
 void Plane::setConnection(boost::signals2::connection c)
