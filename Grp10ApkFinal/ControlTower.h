@@ -11,34 +11,39 @@
 #include "WarningLogger.h"
 
 using namespace std;
+using namespace Airplanes;
 
-template<typename T>
-struct PlaneCombiner
+
+namespace Airspace
 {
-	typedef T result_type;
-
-	template<typename InputIterator>
-	inline T operator()(InputIterator first, InputIterator last) const
+	template<typename T>
+	struct PlaneCombiner
 	{
-		list<Plane*> PlaneList(first, last);
-		return T(PlaneList);
+		typedef T result_type;
+
+		template<typename InputIterator>
+		inline T operator()(InputIterator first, InputIterator last) const
+		{
+			list<Plane*> PlaneList(first, last);
+			return T(PlaneList);
+		};
 	};
-};
 
-class ControlTower
-{
-private:
-	static ControlTower* instance;
-	ControlTower();
-	list<Plane> previousSignals;
-	WarningLogger logger;
-	Calculator<Plane> calculator;
+	class ControlTower
+	{
+	private:
+		static ControlTower* instance;
+		ControlTower();
+		list<Plane> previousSignals;
+		Calculator<Plane> calculator;
+		WarningLogger logger;
 
-public:
-	void isInAirspace(list<Plane*>);
-	static ControlTower* getInstance();
-	//signal med combiner
-	boost::signals2::signal<Plane*(), PlaneCombiner<list<Plane*>>> connections; 
-	void checkAirspace();
-	void checkDistance(Plane*, Plane*);
-};	
+	public:
+		void isInAirspace(list<Plane*>);
+		static ControlTower* getInstance();
+		//signal med combiner
+		boost::signals2::signal<Plane*(), PlaneCombiner<list<Plane*>>> connections; 
+		void checkAirspace();
+		void checkDistance(Plane*, Plane*);
+	};	
+}

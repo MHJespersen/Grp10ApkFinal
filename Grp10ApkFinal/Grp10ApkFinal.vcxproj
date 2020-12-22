@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Calculator.cpp" />
     <ClCompile Include="ControlTower.cpp" />
     <ClCompile Include="Grp10ApkFinal.cpp" />
     <ClCompile Include="Plane.cpp" />
