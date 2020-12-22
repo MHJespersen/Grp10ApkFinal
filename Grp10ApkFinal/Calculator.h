@@ -2,6 +2,7 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 #endif
+#include <math.h>
 using namespace Airplanes;
 namespace Airspace
 {
