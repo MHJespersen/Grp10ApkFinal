@@ -6,8 +6,6 @@
 #include <math.h>
 #include "Plane.h"
 
-
-
 using namespace std;
 
 template<typename T>

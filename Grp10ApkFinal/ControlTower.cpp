@@ -61,7 +61,7 @@ void ControlTower::checkAirspace()
 				for (list<Plane>::iterator p = previousSignals.begin(); p != previousSignals.end(); p++)
 				{
 					if ((*c)->nametag == p->nametag)
-					cout << "Plane: " << (*c)->nametag << " is flyting with : " << calculator.speedCalculator((*c), &(*p)) << " km/h" << endl;
+					cout << "Plane: " << (*c)->nametag << " is flying with : " << calculator.speedCalculator((*c), &(*p)) << " km/h" << endl;
 					else
 					{
 						checkDistance((*c), &(*p));
