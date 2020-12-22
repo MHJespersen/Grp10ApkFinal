@@ -11,7 +11,7 @@
 
 ControlTower* ControlTower::instance;
 //auto delIt = find_if(previousSignals.begin(), previousSignals.end(), [&Nametag](Plane obj) {return obj.nametag == Nametag; });
-bool ControlTower::isInAirspace(list<Plane*> currentPlanes)
+void ControlTower::isInAirspace(list<Plane*> currentPlanes)
 {
 
 	for (auto p = previousSignals.begin(); p != previousSignals.end(); p++)
@@ -20,12 +20,12 @@ bool ControlTower::isInAirspace(list<Plane*> currentPlanes)
 		auto it = find_if(currentPlanes.begin(), currentPlanes.end(), [p](Plane* obj) {return obj->nametag == p->nametag; });
 		if (it == currentPlanes.end()) {
 			//Old signal is no longer valid, delete unused object
-			previousSignals.erase(p);
-			break;
+			previousSignals.erase(p++);
+			cout << "Deleted" << endl;
+			cout << previousSignals.size() << endl;
+			cout << currentPlanes.size() << endl;
 		}
 	};
-
-	return true;
 }
 
 ControlTower* ControlTower::getInstance()
@@ -66,10 +66,7 @@ void ControlTower::CheckAirspace() //std::vector<Plane> planes, mutex& m1, mutex
 				for (auto p = previousSignals.begin(); p != previousSignals.end(); p++)
 				{
 					if ((*c)->nametag == p->nametag)
-					{
-						//Omregn mph?
 						cout << "Plane: " << (*c)->nametag << " is flyting with : " << Calculator.speedCalculator((*c), &(*p)) << " mp/h" << endl;
-					}
 					else
 					{
 						float distance = Calculator.distanceCalculator((*c), &(*p));

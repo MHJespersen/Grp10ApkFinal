@@ -10,6 +10,23 @@ const int WEST = 3;
 
 const int Sleeptime = 1; // Sleeptime in seconds
 
+bool Plane::operator==(const Plane* other)
+{
+	return nametag == other->nametag;
+}
+
+Plane& Plane::operator=(const Plane* other)
+{
+	if (this == other)
+		return *this;
+
+	this->nametag = other->nametag;
+	this->xcoordinate = other->xcoordinate;
+	this->ycoordinate = other->ycoordinate;
+	this->speed = other->speed;
+	return *this;
+}
+
 Plane::Plane(std::string name, float x, float y)
 {
 	// Set random seed for random generator
@@ -18,7 +35,7 @@ Plane::Plane(std::string name, float x, float y)
 	nametag = name;
 	xcoordinate = x;
 	ycoordinate = y;
-	speed = (float) rand() / RAND_MAX + 1; // speed as float between 1 and 2.
+	speed = 10;//(float) rand() / RAND_MAX + 1; // speed as float between 1 and 2.
 }
 
 void Plane::setConnection(boost::signals2::connection c)
@@ -119,5 +136,7 @@ Plane* Plane::operator()()
 {
 	return this;
 }
+
+
 
 

@@ -41,7 +41,7 @@ private:
 	Calculator<Plane> Calculator;
 
 public:
-	bool isInAirspace(list<Plane*>);
+	void isInAirspace(list<Plane*>);
 	static ControlTower* getInstance();
 	//signal med combiner
 	boost::signals2::signal<Plane*(), PlaneCombiner<list<Plane*>>> connections; 
