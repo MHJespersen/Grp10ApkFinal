@@ -7,11 +7,11 @@ template<class T>
 class Calculator
 {
 private:
-	int timeStamps;
-	float speed;
+	int timeStamps = 0;
+	float speed = 0;
 	float pi = 2 * acos(0.0);
-	float courseInRadians;
-	float degrees;
+	float courseInRadians = 0;
+	float degrees = 0;
 
 public:
 	Calculator();
