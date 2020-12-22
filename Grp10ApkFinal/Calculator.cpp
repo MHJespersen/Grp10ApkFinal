@@ -12,7 +12,7 @@ Calculator<T>::Calculator()
 template<class T>
 float Calculator<T>::distanceCalculator(T* newPlane, T* prevPlane)
 {
-	if constexpr (std::is_pointer_v<Plane*>::value)
+	if constexpr (std::is_pointer<Plane*>::value)
 		return sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2));
 	else
 		throw(string("Not implemented for this type!\n"));
