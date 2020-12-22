@@ -31,8 +31,8 @@ private:
 	static ControlTower* instance;
 	ControlTower();
 	list<Plane> previousSignals;
-	Calculator<Plane> Calculator;
 	WarningLogger logger;
+	Calculator<Plane> calculator;
 
 public:
 	void isInAirspace(list<Plane*>);

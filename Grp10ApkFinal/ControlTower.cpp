@@ -12,7 +12,8 @@
 
 ControlTower* ControlTower::instance;
 
-ControlTower::ControlTower() {}
+ControlTower::ControlTower() {
+}
 
 void ControlTower::isInAirspace(list<Plane*> currentPlanes)
 {
@@ -35,7 +36,7 @@ ControlTower* ControlTower::getInstance()
 	return instance;
 }
 
-void ControlTower::checkAirspace() //std::vector<Plane> planes, mutex& m1, mutex& m2
+void ControlTower::checkAirspace()
 {
 	list<Plane*> currentSignals;
 	while (true)
@@ -61,7 +62,7 @@ void ControlTower::checkAirspace() //std::vector<Plane> planes, mutex& m1, mutex
 				for (list<Plane>::iterator p = previousSignals.begin(); p != previousSignals.end(); p++)
 				{
 					if ((*c)->nametag == p->nametag)
-						cout << "Plane: " << (*c)->nametag << " is flyting with : " << Calculator.speedCalculator((*c), &(*p)) << " km/h" << endl;
+					cout << "Plane: " << (*c)->nametag << " is flying with : " << calculator.speedCalculator((*c), &(*p)) << " km/h" << endl;
 					else
 					{
 						checkDistance((*c), &(*p));
@@ -73,7 +74,7 @@ void ControlTower::checkAirspace() //std::vector<Plane> planes, mutex& m1, mutex
 }
 void ControlTower::checkDistance(Plane* cu, Plane* pre)
 {
-	float distance = Calculator.distanceCalculator(cu, pre);
+	float distance = calculator.distanceCalculator(cu, pre);
 	cout << "Distance between " << cu->nametag << " and " << pre->nametag << " is : " << distance << endl;
 	if (distance < 6)
 	{
