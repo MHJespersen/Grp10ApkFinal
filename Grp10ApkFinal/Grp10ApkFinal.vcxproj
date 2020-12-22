@@ -31,6 +31,7 @@
     <ClInclude Include="ControlTower.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PlaneGenerator.h" />
+    <ClInclude Include="PlanePrinter.h" />
     <ClInclude Include="WarningLogger.h" />
   </ItemGroup>
   <ItemGroup>

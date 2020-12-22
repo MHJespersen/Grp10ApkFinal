@@ -22,7 +22,7 @@ Lektion 7-8:
 	Moving
 	Promises + futures
 	Threading            X
-	Variadics
+	Variadics			 X
 Lektion 9-10:
 	Memory mapped registers
 	Meta programmering

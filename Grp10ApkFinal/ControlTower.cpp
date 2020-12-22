@@ -6,6 +6,7 @@
 #include <vector>
 #include "Plane.h"
 #include "ControlTower.h"
+#include "PlanePrinter.h"
 #include "Calculator.cpp"
 #include <mutex>
 #include <thread>
