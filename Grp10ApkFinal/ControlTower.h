@@ -10,9 +10,9 @@
 #include "Calculator.h"
 #include "WarningLogger.h"
 
+
 using namespace std;
 using namespace Airplanes;
-
 
 namespace Airspace
 {
@@ -20,7 +20,6 @@ namespace Airspace
 	struct PlaneCombiner
 	{
 		typedef T result_type;
-
 		template<typename InputIterator>
 		inline T operator()(InputIterator first, InputIterator last) const
 		{
@@ -28,7 +27,6 @@ namespace Airspace
 			return T(PlaneList);
 		};
 	};
-
 	class ControlTower
 	{
 	private:
@@ -42,7 +40,7 @@ namespace Airspace
 		void isInAirspace(list<Plane*>);
 		static ControlTower* getInstance();
 		//signal med combiner
-		boost::signals2::signal<Plane*(), PlaneCombiner<list<Plane*>>> connections; 
+		boost::signals2::signal<Plane* (), PlaneCombiner<list<Plane*>>> connections;
 		void checkAirspace();
 		void checkDistance(Plane*, Plane*);
 	};	

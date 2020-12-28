@@ -58,7 +58,6 @@ namespace Airspace
 			{
 				previousSignals.clear();
 				std::transform(currentSignals.begin(), currentSignals.end(), std::back_inserter(previousSignals), [](Plane* p) { return *p; });
-				//auto a = bind(&ControlTower::isInAirspace, this, currentSignals);
 				std::this_thread::sleep_for(std::chrono::seconds(3));
 				currentSignals = connections();
 				isInAirspace(currentSignals);

@@ -19,7 +19,7 @@ Lektion 6:
 Lektion 7-8:
 	Compile time if      X
 	Literals
-	Moving
+	Moving               X
 	Promises + futures   X
 	Threading            X
 	Variadics			 X

@@ -3,6 +3,7 @@
 #define CALCULATOR_H
 #endif
 #include <future>
+#include <math.h>
 
 using namespace Airplanes;
 namespace Airspace
@@ -41,41 +42,47 @@ namespace Airspace
 	template<class T>
 	inline float Calculator<T>::speedCalculator(T* newPlane, T* prevPlane)
 	{
-		//define the promise
-		std::promise<float> distPromise;
-		//get the future
-		std::future<float> distResult = distPromise.get_future();
-		timeStamps = (prevPlane->timestamp - newPlane->timestamp);
-		try
+		if constexpr (std::is_pointer<Plane*>::value)
 		{
-			if (timeStamps == 0) throw(std::string("Divide by zero error!\n"));
-			distanceCalculator(std::move(distPromise), prevPlane, newPlane);
-			speed = distResult.get() / timeStamps;
+			//define the promise
+			std::promise<float> distPromise;
+			//get the future
+			std::future<float> distResult = distPromise.get_future();
+			timeStamps = (prevPlane->timestamp - newPlane->timestamp);
+			try
+			{
+				if (timeStamps == 0) throw(std::string("Divide by zero error!\n"));
+				distanceCalculator(std::move(distPromise), prevPlane, newPlane);
+				speed = distResult.get() / timeStamps;
 
+			}
+			catch (const std::string& e)
+			{
+				std::cout << "exception caught\n" << e << std::endl;
+			}
+			if (speed < 0)
+				speed *= -1;
+			return speed * 315;
 		}
-		catch (const std::string& e)
-		{
-			std::cout << "exception caught\n" << e << std::endl;
-		}
-		if (speed < 0)
-			speed *= -1;
-		return speed * 315;
 	}
 	template<class T>
 	inline float Calculator<T>::courseCalculator(T* newPlane, T* prevPlane)
 	{
-		courseInRadians = atan2(newPlane->xcoordinate - prevPlane->xcoordinate, newPlane->ycoordinate - prevPlane->ycoordinate);
-		try
+		if constexpr (std::is_pointer<Plane*>::value)
 		{
-			if (((180 / pi) * courseInRadians) == 0) throw(std::string("Divide by zero error!\n"));
-			degrees = (180 / pi) * courseInRadians;
+			courseInRadians = atan2(newPlane->xcoordinate - prevPlane->xcoordinate, newPlane->ycoordinate - prevPlane->ycoordinate);
+			try
+			{
+				if (((180 / pi) * courseInRadians) == 0) throw(std::string("Divide by zero error!\n"));
+				degrees = (180 / pi) * courseInRadians;
+			}
+			catch (const std::string& e)
+			{
+				std::cout << "Exception caught\n" << e << std::endl;
+			}
+			if (degrees < 0)
+				degrees = degrees + 360;
+			return degrees;
 		}
-		catch (const std::string& e)
-		{
-			std::cout << "Exception caught\n" << e << std::endl;
-		}
-		if (degrees < 0)
-			degrees = degrees + 360;
-		return degrees;
 	}
 }
