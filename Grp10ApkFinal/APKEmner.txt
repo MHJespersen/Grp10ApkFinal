@@ -13,7 +13,7 @@ Lektion 5:
 	Boost                X 
 	Std Bind             X
 	Std Function         X
-	Std Variant          
+	Std Variant          X
 Lektion 6:
 	Exceptions           X 
 Lektion 7-8:

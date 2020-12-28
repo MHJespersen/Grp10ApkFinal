@@ -2,6 +2,7 @@
 #include "PlaneGenerator.h"
 #include "ControlTower.h"
 #include "PlanePrinter.h"
+#include <variant>
 
 using namespace std;
 using namespace Airplanes;
@@ -23,6 +24,21 @@ int main()
     //PlanePrinter printer = PlanePrinter();
     //
     //printer.printPlanes(&plane1, &plane2, &plane3, &plane4, &notaplane);
+
+    //std::variant example
+    //variant<int, string> variant;
+    //variant = "test";
+    //variant = 2;
+    //if (auto value = get_if<int>(&variant))
+    //{
+    //    cout << "Variant is type integer, using index " << variant.index()  << endl;
+    //    cout << *value << endl;
+    //}
+    //else if(auto value = get_if<string>(&variant))
+    //{
+    //    cout << "Variant type is string, using index " << variant.index() << endl;
+    //    cout << *value << endl;
+    //}
 
     return 0;
 }
