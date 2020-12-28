@@ -58,14 +58,8 @@ namespace Airspace
 			std::cout << "exception caught\n" << e << std::endl;
 		}
 		if (speed < 0)
-		{
 			speed *= -1;
-			return speed * 315;
-		}
-		else
-		{
-			return speed * 315;
-		}
+		return speed * 315;
 	}
 	template<class T>
 	inline float Calculator<T>::courseCalculator(T* newPlane, T* prevPlane)
@@ -81,13 +75,7 @@ namespace Airspace
 			std::cout << "Exception caught\n" << e << std::endl;
 		}
 		if (degrees < 0)
-		{
 			degrees = degrees + 360;
-			return degrees;
-		}
-		else
-		{
-			return degrees;
-		}
+		return degrees;
 	}
 }

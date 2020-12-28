@@ -7,20 +7,26 @@ using namespace std;
 class PlanePrinter
 {
 private:
+	function<void()> hello = bind(&PlanePrinter::print, this, "Hello from variadic: ");
 
 public:
+	void print(string text)
+	{
+		cout << text << endl;
+	}
 	template <typename T>
 	void printPlanes(T* plane)
 	{
 		if constexpr (std::is_same<Plane, T>::value)
 		{
-			cout << "Hello from variadic 1" << endl;
+			hello();
+			cout << 1 << endl;
 			cout << plane->nametag << endl;
-
 		}
 		else
 		{
-			cout << "Hello from variadic 2" << endl;
+			hello();
+			cout << 2 << endl;
 			cout << "Not a Plane" << endl;
 		}	
 	}
@@ -30,13 +36,15 @@ public:
 	{
 		if constexpr (std::is_same<Plane, T>::value)
 		{
-			cout << "Hello from variadic 3" << endl;
+			hello();
+			cout << 3 << endl;
 			cout << plane->nametag << endl;
 			printPlanes(args...);
 		}
 		else
 		{
-			cout << "Hello from variadic 4" << endl;
+			hello();
+			cout << 4 << endl;
 			cout << "Not a Plane" << endl;
 			printPlanes(args...);
 		}

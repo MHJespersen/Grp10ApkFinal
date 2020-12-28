@@ -9,6 +9,7 @@
 #include "Calculator.h"
 #include "Plane.h"
 #include <future>
+#include <variant>
 
 using namespace Airplanes;
 
@@ -16,21 +17,20 @@ namespace Airspace
 {
 	ControlTower* ControlTower::instance;
 
-	ControlTower::ControlTower() {
-	}
-
 	void ControlTower::isInAirspace(list<Plane*> currentPlanes)
 	{
-		//Check if old signal is still valid
+		//Check if previous signal is still valid
 		for (auto pIt = previousSignals.begin(); pIt != previousSignals.end(); pIt++)
 		{
 			auto cIt = find_if(currentPlanes.begin(), currentPlanes.end(), [pIt](Plane* obj) {return obj->nametag == pIt->nametag; });
 			if (cIt == currentPlanes.end()) 
 			{
-				//Old signal is no longer valid, delete unused object
+				//Old signal is no longer valid
 				previousSignals.erase(pIt++);
 			}
 		};
+	}
+	ControlTower::ControlTower() {
 	}
 
 	ControlTower* ControlTower::getInstance()
@@ -50,7 +50,7 @@ namespace Airspace
 				currentSignals = connections();
 				if (!currentSignals.empty())
 				{
-					std::transform(currentSignals.begin(), currentSignals.end(),std::back_inserter(previousSignals),[](Plane* p) { return *p; });
+					std::transform(currentSignals.begin(), currentSignals.end(), std::back_inserter(previousSignals), [](Plane* p) { return *p; });
 					currentSignals = connections();
 				}
 			}
@@ -58,6 +58,7 @@ namespace Airspace
 			{
 				previousSignals.clear();
 				std::transform(currentSignals.begin(), currentSignals.end(), std::back_inserter(previousSignals), [](Plane* p) { return *p; });
+				//auto a = bind(&ControlTower::isInAirspace, this, currentSignals);
 				std::this_thread::sleep_for(std::chrono::seconds(3));
 				currentSignals = connections();
 				isInAirspace(currentSignals);
@@ -66,11 +67,9 @@ namespace Airspace
 					for (list<Plane>::iterator p = previousSignals.begin(); p != previousSignals.end(); p++)
 					{
 						if ((*c)->nametag == p->nametag)
-						cout << "Plane: " << (*c)->nametag << " is flying with : " << calculator.speedCalculator((*c), &(*p)) << " km/h" << endl;
+							cout << "Plane: " << (*c)->nametag << " is flying with : " << calculator.speedCalculator((*c), &(*p)) << " km/h" << endl;
 						else
-						{
 							checkDistance((*c), &(*p));
-						}
 					}
 				}
 			}

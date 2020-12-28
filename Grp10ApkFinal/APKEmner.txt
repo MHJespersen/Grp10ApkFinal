@@ -11,16 +11,16 @@ Lektion 4:
 	STL Iterators        X 
 Lektion 5:
 	Boost                X 
-	Std Bind
-	Std Function 
-	Std Variant
+	Std Bind             X
+	Std Function         X
+	Std Variant          
 Lektion 6:
 	Exceptions           X 
 Lektion 7-8:
 	Compile time if      X
 	Literals
 	Moving
-	Promises + futures
+	Promises + futures   X
 	Threading            X
 	Variadics			 X
 Lektion 9-10:

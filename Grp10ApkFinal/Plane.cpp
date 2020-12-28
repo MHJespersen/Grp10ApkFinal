@@ -77,7 +77,6 @@ namespace Airplanes
 			std::this_thread::sleep_for(std::chrono::seconds(Sleeptime));
 			timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
 			ycoordinate += speed;
-			PrintLocation();
 		}
 		Land();
 	}
@@ -90,7 +89,6 @@ namespace Airplanes
 			std::this_thread::sleep_for(std::chrono::seconds(Sleeptime));
 			timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 			ycoordinate -= speed;
-			PrintLocation();
 		}
 		Land();
 	}
@@ -103,7 +101,6 @@ namespace Airplanes
 			std::this_thread::sleep_for(std::chrono::seconds(Sleeptime));
 			timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
 			xcoordinate += speed;
-			PrintLocation();
 		}
 		Land();
 	}
@@ -116,14 +113,13 @@ namespace Airplanes
 			std::this_thread::sleep_for(std::chrono::seconds(Sleeptime));
 			timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
 			xcoordinate -= speed;
-			PrintLocation();
 		}
 		Land();
 	}
 
 	void Plane::PrintLocation()
 	{
-		//std::cout << "Plane : " + nametag + " LOCATION : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
+		std::cout << "Plane : " + nametag + " LOCATION : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
 	}
 
 	Plane::~Plane()
