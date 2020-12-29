@@ -27,6 +27,8 @@ namespace Airspace
 			return T(PlaneList);
 		};
 	};
+
+
 	class ControlTower
 	{
 	private:

@@ -58,7 +58,7 @@ namespace Airspace
 			{
 				previousSignals.clear();
 				std::transform(currentSignals.begin(), currentSignals.end(), std::back_inserter(previousSignals), [](Plane* p) { return *p; });
-				std::this_thread::sleep_for(std::chrono::seconds(3));
+				std::this_thread::sleep_for(std::chrono::seconds(2));
 				currentSignals = connections();
 				isInAirspace(currentSignals);
 				for (list<Plane*>::reverse_iterator c = currentSignals.rbegin(); c != currentSignals.rend(); c++)
@@ -74,14 +74,15 @@ namespace Airspace
 			}
 		}
 	}
+
 	void ControlTower::checkDistance(Plane* cu, Plane* pre)
 	{
-		//define the promise
-		std::promise<float> distPromise;
-		//get the future
-		std::future<float> distResult = distPromise.get_future();
+		promise<float> distPromise;
+		future<float> distResult = distPromise.get_future();
 
-		calculator.distanceCalculator(std::move(distPromise), cu, pre);
+		calculator.distanceCalculator(move(distPromise), cu, pre);
+
+
 		float distance = distResult.get();
 		cout << "Distance between " << cu->nametag << " and " << pre->nametag << " is : " << distance << endl;
 		if (distance < 6)

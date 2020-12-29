@@ -13,12 +13,12 @@ namespace Airplanes
 	class Plane
 	{
 	private:
-		void FlyNorth();	
-		void FlySouth();	
-		void FlyEast();	
+		void FlyNorth();
+		void FlySouth();
+		void FlyEast();
 		void FlyWest();
-		void PrintLocation();
-		void Land();
+		void PrintLocation() const;
+		void Land() const;
 		float speed;
 		boost::signals2::connection connection;
 	public:

@@ -29,7 +29,7 @@ namespace Airplanes
 		return *this;
 	}
 
-	Plane::Plane(std::string name, float x, float y)
+	Plane::Plane(const std::string name, float x, float y)
 	{
 		nametag = name;
 		xcoordinate = x;
@@ -42,7 +42,7 @@ namespace Airplanes
 		this->connection = c;
 	}
 
-	void Plane::TakeOff(int Direction)
+	void Plane::TakeOff(const int Direction)
 	{
 		std::cout << "Plane : " + nametag + " has TAKEN OFF at : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
 		timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
@@ -62,7 +62,7 @@ namespace Airplanes
 		}
 	}
 
-	void Plane::Land()
+	void Plane::Land() const
 	{
 		// Delete plane or give msg to subscriber that fly has landed etc
 		std::cout << "Plane : " + nametag + " has LANDED at : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
@@ -117,7 +117,7 @@ namespace Airplanes
 		Land();
 	}
 
-	void Plane::PrintLocation()
+	void Plane::PrintLocation() const
 	{
 		std::cout << "Plane : " + nametag + " LOCATION : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
 	}

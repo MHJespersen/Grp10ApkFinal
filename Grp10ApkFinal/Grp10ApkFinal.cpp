@@ -7,6 +7,7 @@
 using namespace Airplanes;
 using namespace Airspace;
 
+
 int main()
 {
     thread t1(&PlaneGenerator::GeneratePlane, PlaneGenerator());
@@ -14,7 +15,7 @@ int main()
     t1.join();
     t2.join();
 
-    //---------- variadic template example ----------
+    ////---------- variadic template example ----------
     //Plane plane1("plane1", 1, 1);
     //Plane plane2("plane2", 1, 1);
     //Plane plane3("plane3", 1, 1);
@@ -37,6 +38,7 @@ int main()
     //    std::cout << "Variant type is string, using index " << variant.index() << std::endl;
     //    std::cout << *value << endl;
     //}
+
 
     return 0;
 }

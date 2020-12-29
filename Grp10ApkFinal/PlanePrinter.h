@@ -6,14 +6,13 @@ using namespace std;
 
 string operator"" _val(long double val)
 {
-	string res = "template version: " + to_string(val);
-	return res;
+	return "template version: " + to_string(val);
 };
 
 class PlanePrinter
 {
 private:
-	function<void()> sayHello = bind(&PlanePrinter::print, this, "Hello from variadic: ");
+	const function<void()> sayHello = bind(&PlanePrinter::print, this, "Hello from variadic: ");
 	void print(string text)
 	{
 		cout << text << endl;

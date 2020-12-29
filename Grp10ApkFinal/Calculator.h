@@ -6,17 +6,14 @@
 #include <math.h>
 
 using namespace Airplanes;
+
 namespace Airspace
 {
 	template<class T>
 	class Calculator
 	{
 	private:
-		int timeStamps;
-		float speed;
-		float pi = 2 * acos(0.0);
-		float courseInRadians;
-		float degrees;
+		const float pi = 2 * acos(0.0);
 
 	public:
 		Calculator();
@@ -34,21 +31,19 @@ namespace Airspace
 	{
 		if constexpr (std::is_pointer<Plane*>::value)
 			floatPromise.set_value(sqrt(pow(prevPlane->xcoordinate - newPlane->xcoordinate, 2) + pow(prevPlane->ycoordinate - newPlane->ycoordinate, 2)));
-		else
-			throw(std::string("Not implemented for this type!\n"));
 	}
-
 
 	template<class T>
 	inline float Calculator<T>::speedCalculator(T* newPlane, T* prevPlane)
 	{
 		if constexpr (std::is_pointer<Plane*>::value)
 		{
+			float speed;
 			//define the promise
 			std::promise<float> distPromise;
 			//get the future
 			std::future<float> distResult = distPromise.get_future();
-			timeStamps = (prevPlane->timestamp - newPlane->timestamp);
+			int timeStamps = (prevPlane->timestamp - newPlane->timestamp);
 			try
 			{
 				if (timeStamps == 0) throw(std::string("Divide by zero error!\n"));
@@ -70,7 +65,8 @@ namespace Airspace
 	{
 		if constexpr (std::is_pointer<Plane*>::value)
 		{
-			courseInRadians = atan2(newPlane->xcoordinate - prevPlane->xcoordinate, newPlane->ycoordinate - prevPlane->ycoordinate);
+			float degrees;
+			float courseInRadians = atan2(newPlane->xcoordinate - prevPlane->xcoordinate, newPlane->ycoordinate - prevPlane->ycoordinate);
 			try
 			{
 				if (((180 / pi) * courseInRadians) == 0) throw(std::string("Divide by zero error!\n"));
