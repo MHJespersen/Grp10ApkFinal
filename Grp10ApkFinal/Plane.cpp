@@ -35,6 +35,7 @@ namespace Airplanes
 		xcoordinate = x;
 		ycoordinate = y;
 		speed = (float) rand() / RAND_MAX + 1; // speed as float between 1 and 2.
+		timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	}
 
 	void Plane::setConnection(boost::signals2::connection c)
@@ -45,7 +46,7 @@ namespace Airplanes
 	void Plane::TakeOff(const int Direction)
 	{
 		std::cout << "Plane : " + nametag + " has TAKEN OFF at : " + std::to_string(xcoordinate) + ", " + std::to_string(ycoordinate) << std::endl;
-		timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()); 
+		timestamp = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 
 		switch (Direction)
 		{
