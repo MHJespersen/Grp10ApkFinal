@@ -61,7 +61,7 @@ namespace Airspace
 				std::this_thread::sleep_for(std::chrono::seconds(3));
 				currentSignals = connections();
 				isInAirspace(currentSignals);
-				for (list<Plane*>::iterator c = currentSignals.begin(); c != currentSignals.end(); c++)
+				for (list<Plane*>::reverse_iterator c = currentSignals.rbegin(); c != currentSignals.rend(); c++)
 				{
 					for (list<Plane>::iterator p = previousSignals.begin(); p != previousSignals.end(); p++)
 					{

@@ -4,10 +4,16 @@
 #include <iostream>
 using namespace std;
 
+string operator"" _val(long double val)
+{
+	string res = "template version: " + to_string(val);
+	return res;
+};
+
 class PlanePrinter
 {
 private:
-	function<void()> hello = bind(&PlanePrinter::print, this, "Hello from variadic: ");
+	function<void()> sayHello = bind(&PlanePrinter::print, this, "Hello from variadic: ");
 
 public:
 	void print(string text)
@@ -19,14 +25,14 @@ public:
 	{
 		if constexpr (std::is_same<Plane, T>::value)
 		{
-			hello();
-			cout << 1 << endl;
+			sayHello();
+			cout << 1.0_val << endl;
 			cout << plane->nametag << endl;
 		}
 		else
 		{
-			hello();
-			cout << 2 << endl;
+			sayHello();
+			cout << 2.0_val << endl;
 			cout << "Not a Plane" << endl;
 		}	
 	}
@@ -36,15 +42,15 @@ public:
 	{
 		if constexpr (std::is_same<Plane, T>::value)
 		{
-			hello();
-			cout << 3 << endl;
+			sayHello();
+			cout << 3.0_val << endl;
 			cout << plane->nametag << endl;
 			printPlanes(args...);
 		}
 		else
 		{
-			hello();
-			cout << 4 << endl;
+			sayHello();
+			cout << 4.0_val << endl;
 			cout << "Not a Plane" << endl;
 			printPlanes(args...);
 		}
