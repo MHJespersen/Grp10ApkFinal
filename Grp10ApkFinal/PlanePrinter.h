@@ -14,12 +14,11 @@ class PlanePrinter
 {
 private:
 	function<void()> sayHello = bind(&PlanePrinter::print, this, "Hello from variadic: ");
-
-public:
 	void print(string text)
 	{
 		cout << text << endl;
 	}
+public:
 	template <typename T>
 	void printPlanes(T* plane)
 	{
