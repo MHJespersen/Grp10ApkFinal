@@ -18,21 +18,20 @@ namespace Airplanes
 		void FlyEast();	
 		void FlyWest();
 		void PrintLocation();
-
+		void Land();
+		float speed;
+		boost::signals2::connection connection;
 	public:
 		bool operator==(const Plane* other);
 		Plane& operator=(const Plane* other);
-		boost::signals2::connection connection;
 		Plane(std::string name, float x, float y);
 		~Plane();
 		std::string nametag;
 		float xcoordinate;
 		float ycoordinate;
-		float speed;
 		time_t timestamp;
 		void setConnection(boost::signals2::connection c);
 		void TakeOff(int Direction);
-		void Land();
 		Plane* operator()();
 	};
 }
